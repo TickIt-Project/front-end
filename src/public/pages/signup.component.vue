@@ -2,7 +2,7 @@
 import {defineComponent} from 'vue'
 import ParallaxDecoration from "@/public/components/parallax-decoration.component.vue";
 import NavHeader from "@/public/components/nav-header.component.vue";
-import AuthForm from "@/shared/auth-form.vue";
+import AuthForm from "@/shared/components/auth-form.component.vue";
 
 //resolver
 import {zodResolver} from "@primevue/forms/resolvers/zod";
@@ -48,10 +48,10 @@ export default defineComponent({
     <div class="form-layout">
       <div class="form-title">
         <div class="text">
-          <h1>Welcome to <span>TickIT</span></h1>
-          <p>Bridge the gap. Connect with IT effortlessly</p>
+          <h1>{{$t('auth.welcome_title')}}<span>TickIT</span></h1>
+          <p>{{$t('auth.signup.welcome_message')}}</p>
         </div>
-        <img src="@/assets/TickIT_Logo.svg" alt="">
+        <img src="@/assets/TickIT_Logo.svg" alt="TickIT Logo">
       </div>
       <div class="form-container">
         <auth-form
