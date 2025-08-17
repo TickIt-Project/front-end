@@ -1,0 +1,32 @@
+{
+  "rolesCompany": [
+    "Admin",
+    "Developer",
+    "QA Engineer",
+    "Project Manager",
+    "Support"
+  ],
+  "severityOptions": [
+    "Low",
+    "Medium",
+    "High",
+    "Critical"
+  ],
+  "statusOptions": [
+    "Open",
+    "In Progress",
+    "On Hold",
+    "Closed"
+  ],
+  "screenLocations": [
+    "Login",
+    "Sign Up",
+    "Dashboard",
+    "User Profile",
+    "Settings",
+    "Reports",
+    "Notifications",
+    "Billing",
+    "Support Chat"
+  ]
+}
