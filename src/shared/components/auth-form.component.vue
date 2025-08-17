@@ -12,32 +12,7 @@ export default{
     onFormSubmit: Function,
     submitButton: String,
     slack_label: String
-  },
-  data(){
-/*    return {
-      inputText: ref({
-        handle: {
-          borderRadius: '4px'
-        },
-        colorScheme: {
-          light: {
-            root: {
-              background: '{amber.500}',
-              checkedHoverBackground: '{amber.600}',
-              borderRadius: '4px'
-            },
-            handle: {
-              checkedBackground: '{amber.50}',
-              checkedHoverBackground: '{amber.100}'
-            }
-          }
-        }
-      })
-    }*/
   }
-
-
-
 }
 </script>
 
@@ -56,7 +31,7 @@ export default{
         <pv-button
             @click="$emit('slack-event')"
             severity="secondary">
-          <img src="@/assets/slack.svg" alt="slack icon" style="width: 17px">
+          <img src="../../assets/slack.svg" alt="slack icon" style="width: 17px">
           <span>{{slack_label}}</span>
         </pv-button>
         </div>
