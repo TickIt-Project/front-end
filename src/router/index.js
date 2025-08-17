@@ -14,7 +14,8 @@ import {createRouter, createWebHistory} from "vue-router";
 // const HomeComponent = () => import('../public/pages/home.component.vue');
 const SignInComponent = () => import("../public/pages/signin.component.vue");
 const SignUpComponent = () => import("../public/pages/signup.component.vue");
-
+const ReportComponent = () => import("../troubleshooting/pages/report-issue.component.vue");
+const ProfileComponent = () => import("../users/pages/profile.component.vue");
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
@@ -28,6 +29,8 @@ const SignUpComponent = () => import("../public/pages/signup.component.vue");
 const routes = [
     {   path: '/signIn', name: 'signIn',component: SignInComponent, meta: {title: 'SignIn'}},
     {   path: '/signUp', name: 'signUp',component: SignUpComponent, meta: {title: 'SignUp'}},
+    {   path: '/report', name: 'Report Issue',component: ReportComponent, meta: {title: 'Report Issue'}},
+    {   path: '/profile', name: 'Profile',component: ProfileComponent, meta: {title: 'Profile'}},
 //    {   path: '/about',                 name: 'about',      component: AboutComponent,              meta: {title: 'About us'}},
      {   path: '/', name: 'default', redirect: {name: 'SignIn'}},
 //    {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,       meta: {title: 'Page not found'}},
