@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
 <nav-header :items = items></nav-header>
   <title-subtitle :info = info></title-subtitle>
-  <full-stepper></full-stepper>
+  <full-stepper style="margin-left: 2em"></full-stepper>
 </template>
 
 <style scoped>
