@@ -1,14 +1,14 @@
 <script>
-import {defineComponent} from 'vue'
-import { IssueReportService } from '@/troubleshooting/services/report-api.service.js'
-import {z} from "zod";
+import { IssueReportService } from '@/shared/services/report-api.service.js'
 import {FileUpload as PvFileUpload, Select as PvSelect, Tag as PvTag} from "primevue";
 import {FormField as PvFormField} from "@primevue/forms";
+import {severityConfig} from "@/shared/services/severity-configurations.js";
+import ReportIssueCard from "@/shared/components/report-issue-card.component.vue";
 
 
 export default {
   name: "full-stepper",
-  components: {PvTag, PvFormField, PvFileUpload, PvSelect},
+  components: {ReportIssueCard, PvTag, PvFormField, PvFileUpload, PvSelect},
   data() {
     return {
       formValues: {
@@ -17,17 +17,23 @@ export default {
         screen_issue: '',
         url: '',
         role: '',
-        severity: '',
+        severity: {},
       },
       //todo change url to service
       uploadUrl: 'https://httpbin.org/post',
       value: '',
       maxChars: 3000,
       severityMap: {
-        Critical: 'danger',
-        High: 'warn',
-        Medium: 'info',
-        Low: 'success'
+        critical: 'danger',
+        high: 'warn',
+        medium: 'info',
+        low: 'success'
+      },
+      severityMapLabel: {
+        critical: 'Critical',
+        high: 'High',
+        medium: 'Medium',
+        low: 'Low'
       },
       reportService: new IssueReportService(),
       /**
@@ -64,7 +70,7 @@ export default {
           const severityField = this.fields.find(f => f.name === 'severity');
           if (severityField && Array.isArray(severityRes.data)) {
             severityField.options = severityRes.data.map(sev => ({
-              label: sev,
+              label: this.severityMapLabel[sev],
               value: sev
             }));
           }
@@ -91,6 +97,9 @@ export default {
     }
   },
   computed: {
+    severityConfig() {
+      return severityConfig
+    },
     nameLength() {
       return (this.formValues.name || '').trim().length;
     },
@@ -193,7 +202,7 @@ export default {
                     class="select"
                     :options="field.options"
                     optionLabel="label"
-                    optionValue="value"
+                    :optionValue="value"
                     :inputId="field.name"
                 />
                 <label :for="field.name">{{ field.label }}</label>
@@ -245,33 +254,7 @@ export default {
         <pv-step>{{$t('report.steps.3.header')}}</pv-step>
         <pv-step-panel v-slot="{ activateCallback }">
           <div class="content">
-            <pv-card class="card">
-
-              <template #header>
-                <div style="display: flex; align-items: center; gap: 10px; margin-top: 20px">
-                <h3 style="margin:0;">{{ formValues.name }}</h3>
-                <pv-tag :severity="severityMap[formValues.severity]" :value="formValues.severity" />
-                </div>
-              </template>
-              <template #content>
-                <div class="contentWithImage">
-                  <div>
-                  <div v-html="formValues.description"></div>
-                    <div class="extraInfoContainer">
-                      <div class="iconTextContainer">
-                        <i class="pi pi-map-marker"></i>
-                        <p>{{ formValues.screen_issue }}</p>
-                      </div>
-                      <div class="iconTextContainer">
-                        <i class="pi pi-user"></i>
-                        <p>{{ formValues.role }}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <img style="" src="https://eq2imhfmrcc.exactdn.com/wp-content/uploads/2016/08/golden-retriever.jpg" width="300" alt="image">
-                </div>
-              </template>
-            </pv-card>
+            <report-issue-card :border="true" :issue="formValues"></report-issue-card>
           </div>
           <div class="buttons">
             <pv-button :label="$t('report.steps.buttons.back')" severity="secondary" @click="activateCallback('2')" />
@@ -283,34 +266,7 @@ export default {
 </template>
 
 <style scoped>
-.card{
-  width: fit-content;
-}
-.contentWithImage {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-}
 
-.contentWithImage img {
-  max-width: 300px;
-  height: auto;
-}
-.extraInfoContainer{
-  margin-top: 2rem;
-}
-.iconTextContainer p{
-  margin: 0;
-}
-.iconTextContainer{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 1rem;
-}
-.card{
-  padding-left: 3vh;
-}
 .fileUpload i{
   border-radius: 50%;
   border: 3px solid;
