@@ -4,7 +4,7 @@ import {defineComponent} from 'vue'
 export default defineComponent({
   name: "title-subtitle",
   props:{
-    info: Array
+    info: Object
   }
 })
 </script>
