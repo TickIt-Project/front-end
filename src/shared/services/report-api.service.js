@@ -1,7 +1,6 @@
 import { http } from "@/shared/services/http-common.js";
 
 export class IssueReportService {
-    issueReportEndpoint = ""
 
     getRolesOfCompanyByCompanyId() {
         return http.get(`/rolesCompany`);
@@ -17,5 +16,8 @@ export class IssueReportService {
 
     getScreenLocationOptions(){
         return http.get(`/screenLocations`);
+    }
+    getIssuesByCompanyId(){
+        return http.get(`/issues`);
     }
 }
