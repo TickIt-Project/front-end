@@ -1,6 +1,5 @@
 <script lang="ts">
 import {defineComponent, PropType} from 'vue'
-import {Dialog as PvDialog} from "primevue";
 import ReportIssueCard from "@/shared/components/report-issue-card.component.vue";
 
 import { severityConfig, statusConfig } from "@/shared/services/severity-configurations";
@@ -14,7 +13,7 @@ interface Field {
 
 export default defineComponent({
   name: "template-table",
-  components: {ReportIssueCard, PvDialog},
+  components: {ReportIssueCard},
   props:{
     filters: {
       type: Object as PropType<Record<string, any>>,
@@ -35,7 +34,8 @@ export default defineComponent({
       productDialogVisible: false,
       issue:{},
       severityConfig,
-      statusConfig
+      statusConfig,
+
     }
   },
 
@@ -60,7 +60,7 @@ export default defineComponent({
         <pv-button label="Cancel" @click="productDialogVisible=false" variant="text" style="width: 8rem;"></pv-button>
       </div>
   </pv-dialog>
-  <pv-data-table v-model:filters="localFilters" :value="issues" paginator :rows="10" filterDisplay="menu">
+  <pv-data-table  v-model:filters="localFilters" :value="issues" paginator :rows="10" filterDisplay="menu">
     <template #header>
       <div class="flex justify-between">
         <pv-button type="button" icon="pi pi-filter-slash" label="Clear" variant="outlined" @click="clearFilter" />
@@ -108,20 +108,25 @@ export default defineComponent({
                     v-model="filterModel.value"
                     :placeholder="$t('statistics.searchBy') + field.title"
                 />
+
+                    <!-- arrow function de si existe label lo usa, sino name. option es cada objeto del array -->
                     <pv-multi-select     v-else-if="field.type === 'select'"
                                          v-model="filterModel.value"
                                          :options="field.options"
-                                         optionLabel="name"
-                                         :optionValue="(option) => option"
+                                         :optionLabel="(option) => option.label || option.name"
+                                         :optionValue="(option) => option.value || option"
                                          display="chip">
                         <template #option="slotProps">
-                            <div style="display: flex; align-items: center;gap: 5px">
+                            <div v-if="slotProps.option?.img_url" style="display: flex; align-items: center;gap: 5px">
                               <img
                                   :src="slotProps.option.img_url"
                                   :alt="slotProps.option.name"
                                   style="max-width: 2em; border-radius: 50%"
                               />
                                 <span>{{ slotProps.option.name }}</span>
+                            </div>
+                            <div v-else>
+                              <span>{{ slotProps.option.label }}</span>
                             </div>
                            </template>
                     </pv-multi-select>
@@ -152,7 +157,7 @@ export default defineComponent({
         </span>
         <pv-column>
           <template #body="slotProps">
-            <pv-button icon="pi pi-plus" variant="outlined" rounded class="mr-2" @click="showIssue(slotProps)" />
+            <pv-button icon="pi pi-plus"  rounded class="mr-2" @click="showIssue(slotProps) " :label="$t('statistics.fields.seeMore') "  />
           </template>
     </pv-column>
   </pv-data-table>

@@ -1,10 +1,8 @@
 <script>
 
-import {Button as PvButton} from "primevue";
 
 export default{
   name: "auth-form",
-  components: {PvButton},
   props: {
     resolver: Function,
     fields: Array,

@@ -16,6 +16,10 @@ const SignInComponent = () => import("../public/pages/signin.component.vue");
 const SignUpComponent = () => import("../public/pages/signup.component.vue");
 const ReportComponent = () => import("../troubleshooting/pages/report-issue.component.vue");
 const ProfileComponent = () => import("../users/pages/profile.component.vue");
+const MyIssuesComponent = () => import("../statistics/pages/my-issues-employee.component.vue");
+const HistoryComponent = () => import("../statistics/pages/history-it-page.component.vue");
+const DashboardComponent = () => import("../troubleshooting/pages/dashboard-page.component.vue");
+const RecurrentPagesComponent = () => import("../statistics/pages/recurrent-issues-pages.vue");
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
@@ -31,8 +35,11 @@ const routes = [
     {   path: '/signUp', name: 'signUp',component: SignUpComponent, meta: {title: 'SignUp'}},
     {   path: '/report', name: 'Report Issue',component: ReportComponent, meta: {title: 'Report Issue'}},
     {   path: '/profile', name: 'Profile',component: ProfileComponent, meta: {title: 'Profile'}},
-//    {   path: '/about',                 name: 'about',      component: AboutComponent,              meta: {title: 'About us'}},
-     {   path: '/', name: 'default', redirect: {name: 'SignIn'}},
+    {   path: '/issues/reported', name: 'My Reported Issues',component: MyIssuesComponent, meta: {title: 'My Reported Issues'}},
+    {   path: '/history', name: 'Issue History',component: HistoryComponent, meta: {title: 'History of Issues'}},
+    {   path: '/dashboard', name: 'Dashboard',component: DashboardComponent, meta: {title: 'Dashboard'}},
+    {   path: '/reports', name: 'Reports',component: ReportComponent, meta: {title: 'reports'}},
+  {   path: '/recurrent', name: 'recurrent', component: RecurrentPagesComponent, meta: {title: 'Recurrent Issues'}},
 //    {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,       meta: {title: 'Page not found'}},
 ]
 

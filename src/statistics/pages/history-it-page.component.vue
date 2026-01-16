@@ -1,34 +1,36 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import NavHeader from "@/public/components/nav-header.component.vue";
 import TitleSubtitle from "@/shared/components/title-subtitle.component.vue";
+import NavHeader from "@/public/components/nav-header.component.vue";
 import TemplateTable from "@/statistics/components/template-table.component.vue";
-import { FilterMatchMode, FilterOperator } from '@primevue/core/api';
-import { UsersService } from "@/shared/services/users-api.service";
+import {FilterMatchMode, FilterOperator} from "@primevue/core/api";
+import { UsersService } from '@/shared/services/users-api.service';
 import { IssueReportService } from '@/shared/services/report-api.service';
 import { IssueReportAssembler } from '@/shared/services/report-assembler';
 
 export default defineComponent({
-  name: "my-issues-employee",
+  name: "history-it-page",
   components: {TemplateTable, TitleSubtitle, NavHeader},
   data(){
     return{
-      items:[{label: this.$t('nav.report'), route:"/report"}, {label:this.$t('nav.myIssues'), route:"/issues/reported"}],
-      info: {title: this.$t('statistics.myIssues.employee.info.title'), sub: this.$t('statistics.myIssues.employee.info.sub')},
+      items:[{label: this.$t('nav.dashboard'), route:"/dashboard"}, {label:this.$t('nav.assignedIssues'), route:"/issues/assigned"},{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.recurrentIssues'), route:"/recurrent"}],
+      info: {title: this.$t('statistics.myIssues.it.info.title'), sub: this.$t('statistics.myIssues.it.info.sub')},
       filters:{
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         title: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
         assignee: { value: [], matchMode: FilterMatchMode.IN },
+        reporter: { value: [], matchMode: FilterMatchMode.IN },
+        screen: { value: [], matchMode: FilterMatchMode.IN },
         submittedAt: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
         resolvedAt: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS  }] },
         severity: { value: [], matchMode: FilterMatchMode.IN },
-        status:{ value: [], matchMode: FilterMatchMode.IN }
       },
       fields:[
         { key: "title", title: this.$t('statistics.fields.title'), type: "text" },
-        { key: "status", title: this.$t('statistics.fields.status'), type: "tag" },
         { key: "assignee", title: this.$t('statistics.fields.assignedTo'), type: "select"},
+        { key: "reporter", title: this.$t('statistics.fields.reporter'), type: "select" },
         { key: "severity", title: this.$t('statistics.fields.severity'), type: "tag"},
+        { key: "screen", title: this.$t('statistics.fields.location'), type: "select" },
         { key: "submittedAt", title: this.$t('statistics.fields.submittedAt'), type: "date" },
         { key: "resolvedAt", title: this.$t('statistics.fields.resolvedAt'), type: "date" }
       ],
@@ -48,6 +50,14 @@ export default defineComponent({
           img_url: u.img_url}));
       }
     });
+    this.usersService.getEmployeesByCompanyId().then((res) => {
+      const assignedToField = this.fields.find(f => f.key === "reporter");
+      if (assignedToField) {
+        assignedToField.options = res.data.map((u: any) => ({
+          name: u.name,
+          img_url: u.img_url}));
+      }
+    });
     this.reportService.getSeverityOptions().then((res) => {
       const assignedToField = this.fields.find(f => f.key === "severity");
       if (assignedToField) {
@@ -57,11 +67,11 @@ export default defineComponent({
         }));
       }
     });
-    this.reportService.getStatusOptions().then((res) => {
-      const assignedToField = this.fields.find(f => f.key === "status");
-      if (assignedToField) { //back gives me value for translating later
+    this.reportService.getScreenLocationOptions().then((res) => {
+      const assignedToField = this.fields.find(f => f.key === "screen");
+      if (assignedToField) {
         assignedToField.options = res.data.map((opt: any) => ({
-          label: this.$t('status.' + opt),
+          label: opt,
           value: opt
         }));
       }
@@ -80,13 +90,14 @@ export default defineComponent({
   <div style="display: flex; justify-content: center">
     <div style="width: 97%">
       <template-table
-      :filters="filters"
-      :fields="fields"
-      :issues="issues"
+          :filters="filters"
+          :fields="fields"
+          :issues="issues"
       ></template-table>
     </div>
   </div>
 </template>
+
 <style scoped>
 
 </style>

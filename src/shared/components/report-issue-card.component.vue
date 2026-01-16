@@ -48,7 +48,7 @@ export default defineComponent({
       </div>
     </template>
     <template #footer >
-      <div style="display: flex; justify-content: space-evenly">
+      <div style="display: flex; justify-content: space-evenly;">
         <div class="footerContainer" v-if="issue.assignee" >
           <h4>{{$t("card.assignedMember")}}</h4>
           <div style="display: flex; gap: 5px; align-items: center">
@@ -63,6 +63,9 @@ export default defineComponent({
         <div class="footerContainer" v-if="issue.resolvedAt">
           <h4>{{$t("card.solvedAt")}}</h4>
           <p>{{issue.resolvedAt.toLocaleDateString()}}</p>
+        </div>
+        <div class="footerContainer" v-if="issue.status === 'open'" style="margin-top: 40px">
+          <pv-button :label="$t(`card.takeIssue`)" severity="sucess"></pv-button>
         </div>
       </div>
     </template>
