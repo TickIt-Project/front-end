@@ -197,17 +197,33 @@ export default {
               </div>
 
               <pv-float-label v-if="field.type === 'select'" variant="on">
-                <pv-select
-                    v-model="formValues[field.name]"
-                    :editable="field.editable"
-                    class="select"
-                    :options="field.options"
-                    optionLabel="label"
-                    :optionValue="value"
-                    :inputId="field.name"
-                />
-                <label :for="field.name">{{ field.label }}</label>
+                <!-- Wrapper para select + icon -->
+                <div class="select-with-tooltip">
+                  <pv-select
+                      v-model="formValues[field.name]"
+                      :editable="field.editable"
+                      class="select"
+                      :options="field.options"
+                      optionLabel="label"
+                      :inputId="field.name"
+                  />
+
+                  <!-- Icono SOLO para severity -->
+                  <i
+                      v-if="field.name === 'severity'"
+                      class="pi pi-info-circle severity-info"
+                      v-tooltip="{
+    value: $t('severity.tooltip.all'),
+    escape: false
+  }"
+                  />
+                </div>
+
+                <label :for="field.name">
+                  {{ field.label }}
+                </label>
               </pv-float-label>
+
             </div>
           </div>
           </div>
@@ -309,5 +325,19 @@ export default {
 
 p{
   font-size: 15px;
+}
+
+.select-with-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.severity-info {
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 1rem;
+  position: absolute;
+  left: 102%;
 }
 </style>

@@ -95,8 +95,6 @@ app.use(PrimeVue, { theme: {
     .component('pv-dialog', Dialog)
     .component('pv-fieldset', Fieldset)
 
-    .directive('pv-tooltip', Tooltip)
-
 
 
 
@@ -108,6 +106,10 @@ app.use(i18n);
 
 //ToastService
 app.use(ToastService);
+
+//ToastService
+app.directive('tooltip', Tooltip);
+
 
 // Mount App
 app.mount('#app');
