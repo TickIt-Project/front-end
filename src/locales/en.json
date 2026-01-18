@@ -132,7 +132,19 @@
     "assignedMember": "Assigned IT member",
     "status": "Status",
     "solvedAt": "Solved At",
-    "takeIssue": "Take Issue"
+    "takeIssue": "Take Issue",
+    "toastIssueTake":{
+      "takeIssue": {
+        "issueTaken":"Issue Taken",
+        "issue": "Issue",
+        "issueTakenDesc": "Taken Succesfully"
+      },
+
+      "detakeIssue": {
+        "issuedeTaken":"Issue Taken",
+        "issuedeTakenDesc": "Taken Succesfully"
+      }
+    }
   },
   "status": {
     "open": "Open",

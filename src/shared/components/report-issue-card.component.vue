@@ -1,23 +1,31 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import { severityConfig, statusConfig } from '../services/severity-configurations';
-import {Avatar as PvAvatar, Tag as PvTag} from "primevue";
+import {Avatar as PvAvatar, Tag as PvTag, useToast} from "primevue";
+import Toast from 'primevue/toast';
+
 
 export default defineComponent({
   name: "report-issue-card",
-  components: {PvTag, PvAvatar},
+  components: {PvTag, PvAvatar, Toast},
   props: {
     border: Boolean,
     issue: Object, //objeto clave - valor
     fullInformation: Boolean
   },
   data() {
-    return { severityConfig, statusConfig };
-  }
+    return { severityConfig, statusConfig,isTakeIssueDisabled: false };
+  },
+  methods:{
+    clickedTaken(){
+      this.isTakeIssueDisabled = true;
+      this.$toast.add({ severity: 'success', summary: this.$t(`card.toastIssueTake.takeIssue.issueTaken`), detail: this.$t(`card.toastIssueTake.takeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.takeIssue.issueTakenDesc`), life: 3000 });
+    }}
 })
 </script>
 
 <template>
+  <Toast />
   <pv-card class="card"
            :class="{'no-border': border === false}">
 
@@ -65,7 +73,7 @@ export default defineComponent({
           <p>{{issue.resolvedAt.toLocaleDateString()}}</p>
         </div>
         <div class="footerContainer" v-if="issue.status === 'open'" style="margin-top: 40px">
-          <pv-button :label="$t(`card.takeIssue`)" severity="sucess"></pv-button>
+          <pv-button :disabled="isTakeIssueDisabled" :label="$t(`card.takeIssue`)" severity="sucess" @click="clickedTaken()"></pv-button>
         </div>
       </div>
     </template>

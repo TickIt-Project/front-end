@@ -25,7 +25,7 @@ import {
     Message, MultiSelect,
     Password,
     Select,
-    Tag, Tooltip
+    Tag, ToastService, Tooltip
 } from "primevue";
 import {definePreset} from "@primeuix/themes";
 
@@ -106,8 +106,8 @@ app.use(router);
 // Vue i18n
 app.use(i18n);
 
-//Pinia
-app.use(pinia);
+//ToastService
+app.use(ToastService);
 
 // Mount App
 app.mount('#app');
