@@ -25,7 +25,7 @@ import {
     Message, MultiSelect,
     Password,
     Select,
-    Tag, Tooltip
+    Tag, ToastService, Tooltip
 } from "primevue";
 import {definePreset} from "@primeuix/themes";
 
@@ -95,8 +95,6 @@ app.use(PrimeVue, { theme: {
     .component('pv-dialog', Dialog)
     .component('pv-fieldset', Fieldset)
 
-    .directive('pv-tooltip', Tooltip)
-
 
 
 
@@ -106,8 +104,12 @@ app.use(router);
 // Vue i18n
 app.use(i18n);
 
-//Pinia
-app.use(pinia);
+//ToastService
+app.use(ToastService);
+
+//ToastService
+app.directive('tooltip', Tooltip);
+
 
 // Mount App
 app.mount('#app');
