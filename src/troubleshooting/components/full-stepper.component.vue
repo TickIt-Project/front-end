@@ -208,7 +208,6 @@ export default {
                       :inputId="field.name"
                   />
 
-                  <!-- Icono SOLO para severity -->
                   <i
                       v-if="field.name === 'severity'"
                       class="pi pi-info-circle severity-info"
