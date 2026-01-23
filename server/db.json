@@ -200,5 +200,29 @@
       }
     }
 
+  ],
+  "users": [
+    {
+      "id": 1,
+      "role_id": 1,
+      "company_role_id": 1,
+      "name": "Gabriel Sanchez",
+      "email": "gabriel.sanchez@acme.com",
+      "password": "admin123",
+      "company_id": 100,
+      "notify_active": true,
+      "profile_image": "https://images.ctfassets.net/denf86kkcx7r/206sKHHdoJovwu9AzcdCQ/2b7b64112272693f8c3eeb4b491626b9/gato_negro_1_.jpg?fm=webp&w=612"
+    },
+    {
+      "id": 2,
+      "role_id": 2,
+      "company_role_id": 3,
+      "name": "Luciana Ochoa",
+      "email": "luciana8a@acme.com",
+      "password": "user123",
+      "company_id": 100,
+      "notify_active": false,
+      "profile_image": "https://i.pravatar.cc/150?img=47"
+    }
   ]
 }

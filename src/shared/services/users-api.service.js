@@ -10,4 +10,12 @@ export class UsersService {
         return http.get(`/it-members`);
     }
 
+    getUserById(id) {
+        return http.get(`/users/${id}`);
+    }
+
+    getCurrentUser() {
+        return http.get('/users/1');
+    }
+
 }
