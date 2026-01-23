@@ -10,13 +10,15 @@
       email: { type: String, required: true },
       role: { type: String, required: true },
       company: { type: String, required: true },
-      profileImage: { type: String, required: true }
+      imgUrl: { type: String, required: true }
     },
     emits: ['field-changed'],
     data() {
       return {
         localName: this.name,
-        localEmail: this.email
+        localEmail: this.email,
+        passwordVisible: false,
+        newPassword: ''
       };
     },
 
@@ -35,6 +37,7 @@
       },
 
       onFileSelected(event: Event) {
+
         const input = event.target as HTMLInputElement;
         const file = input.files?.[0];
         if (!file) return;
@@ -46,28 +49,56 @@
           value: preview
         });
       },
-      saveName(close: () => void) {
+      saveName() {
 
         this.$emit('field-changed', {
           field: 'name',
           value: this.localName
         })},
-      saveEmail(close: () => void) {
+      saveEmail() {
         this.$emit('field-changed', {
           field: 'email',
           value: this.localEmail
         })},
+      savePassword() {
+        console.log("berry chan")
+        if (!this.newPassword) return;
+        this.$emit('field-changed', {
+          field: 'password',
+          value: this.newPassword
+        });
+
+        this.newPassword = '';
+        this.passwordVisible = false;
+
       }
+      }
+
   });
   </script>
 
   <template>
+    <pv-dialog
+        v-model:visible="passwordVisible"
+        modal
+        header="Change Password"
+        :style="{ width: '25rem' }"
+    >
+      <div class="password-row">
+        <label for="newPassword" class="password-label">New Password</label>
+        <pv-input-text id="newPassword" v-model="newPassword" class="password-input" autocomplete="off" />
+      </div>
+      <div class="password-actions">
+        <pv-button type="button" label="Cancel" severity="secondary" @click="passwordVisible = false"></pv-button>
+        <pv-button type="button" label="Save" @click="savePassword()"></pv-button>
+      </div>
+    </pv-dialog>
     <div style="display: flex; justify-content: center; align-items: center; height: 90vh">
       <div class="card">
         <div class="content">
           <div class="header">
             <div class="avatar-wrapper" @click="triggerUpload">
-              <img :src="profileImage" alt="Profile" class="avatar" />
+              <img :src="imgUrl" alt="Profile" class="avatar" />
 
               <div class="avatar-overlay">
                 <i class="pi pi-pencil"></i>
@@ -114,7 +145,7 @@
 
           </div>
           <div class="footer">
-            <pv-button class="btn">Change Password</pv-button>
+            <pv-button class="btn" @click="passwordVisible = true">Change Password</pv-button>
 
             <p class="role">{{ role }}</p>
           </div>
@@ -227,5 +258,27 @@
 
   .avatar-wrapper:hover .avatar-overlay {
     opacity: 1;
+  }
+
+  .password-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .password-label {
+    font-weight: 600;
+    width: 8rem;
+  }
+
+  .password-input {
+    flex: 1;
+  }
+
+  .password-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
   }
   </style>

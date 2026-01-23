@@ -271,19 +271,21 @@
   "users": [
     {
       "id": 1,
-      "role_id": 1,
-      "company_role_id": 1,
-      "name": "HAII",
-      "email": "pajaro@gmail.com",
-      "password": "admin123",
+      "role": "Guest",
+      "company": "Helios",
+      "company_role_id": "Advisor",
+      "name": "ricardo moran",
+      "email": "soyyobb@gmail.com",
+      "password": "cangreburger",
       "company_id": 100,
       "notify_active": true,
-      "profile_image": "https://images.ctfassets.net/denf86kkcx7r/206sKHHdoJovwu9AzcdCQ/2b7b64112272693f8c3eeb4b491626b9/gato_negro_1_.jpg?fm=webp&w=612"
+      "profile_image": "https://i.pravatar.cc/150?img=47"
     },
     {
       "id": 2,
-      "role_id": 2,
-      "company_role_id": 3,
+      "role_id": "IT support",
+      "company": "UPC",
+      "company_role_id": "Practicante",
       "name": "Luciana Ochoa",
       "email": "luciana8a@acme.com",
       "password": "user123",
