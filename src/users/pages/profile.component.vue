@@ -9,7 +9,8 @@ export default defineComponent({
   components: {UserCard, NavHeader},
   data() {
     return {
-      user: null
+      user: null,
+      userService: new UsersService()
     };
   },
   mounted() {
@@ -17,6 +18,15 @@ export default defineComponent({
     userService.getCurrentUser().then(res => {
       this.user = res.data;
     });
+  },
+  methods: {
+    onFieldChanged(payload) {
+      this.userService.updateUser({
+        [payload.field]: payload.value
+      }).catch(err => {
+            console.error('Error updating user', err);
+      });
+    }
   }
 
 })
@@ -31,6 +41,7 @@ export default defineComponent({
       v-model:profileImage="user.profile_image"
       :role="user.role"
       :company="user.company"
+      @field-changed="onFieldChanged"
   />
 </template>
 

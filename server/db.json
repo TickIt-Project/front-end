@@ -19,35 +19,71 @@
     "closed"
   ],
   "screenLocations": [
-    {"Login":"login",
-    "Sign Up": "signup",
-    "Dashboard": "dashboard",
-    "User Profile": "userProfile",
-    "Settings": "settings",
-    "Reports":  "reports",
-    "Notifications": "notifications",
-    "Billing": "billing",
-    "Support Chat": "support-chat"}
+    {
+      "Login": "login",
+      "Sign Up": "signup",
+      "Dashboard": "dashboard",
+      "User Profile": "userProfile",
+      "Settings": "settings",
+      "Reports": "reports",
+      "Notifications": "notifications",
+      "Billing": "billing",
+      "Support Chat": "support-chat"
+    }
   ],
   "it-members": [
-    { "id": 1, "name": "Laura Gómez",
+    {
+      "id": 1,
+      "name": "Laura Gómez",
       "img_url": "https://bananapedia.wiki.gg/images/thumb/5/55/BR_Miku.png/300px-BR_Miku.png"
     },
-    { "id": 2, "name": "Jorge Ramírez",
-      "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"},
-    { "id": 3, "name": "Pedro Sánchez" ,
-      "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s" },
-    { "id": 4, "name": "Marta Díaz" ,
-      "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"},
-    { "id": 5, "name": "Andrés Fernández" ,
-      "img_url": "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Egyptian-Mau.jpg?itok=fCvzRc-X"}
+    {
+      "id": 2,
+      "name": "Jorge Ramírez",
+      "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"
+    },
+    {
+      "id": 3,
+      "name": "Pedro Sánchez",
+      "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s"
+    },
+    {
+      "id": 4,
+      "name": "Marta Díaz",
+      "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Andrés Fernández",
+      "img_url": "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-06Egyptian-Mau.jpg?itok=fCvzRc-X"
+    }
   ],
-  "employees":  [
-    { "id": 1, "name": "Sofía Morales", "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg" },
-    { "id": 2, "name": "Diego Vilca", "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg" },
-    { "id": 3, "name": "Valentina Ríos", "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg" },
-    { "id": 4, "name": "Camilo Herrera", "img_url": "https://i.pinimg.com/736x/c5/7e/ef/c57eef806ed7cc63d24508293553f41b.jpg" },
-    { "id": 5, "name": "Isabel Castro", "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg" }
+  "employees": [
+    {
+      "id": 1,
+      "name": "Sofía Morales",
+      "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Diego Vilca",
+      "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Valentina Ríos",
+      "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Camilo Herrera",
+      "img_url": "https://i.pinimg.com/736x/c5/7e/ef/c57eef806ed7cc63d24508293553f41b.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Isabel Castro",
+      "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+    }
   ],
   "issues": [
     {
@@ -60,7 +96,10 @@
       "severity": "high",
       "img_url": "https://example.com/screenshots/issue1.png",
       "status": "open",
-      "reporter": {"name": "Sofía Morales", "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg" },
+      "reporter": {
+        "name": "Sofía Morales",
+        "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg"
+      },
       "submittedAt": "2024-08-26T15:42:30",
       "ticket_option": true
     },
@@ -74,10 +113,14 @@
       "severity": "medium",
       "img_url": "https://example.com/screenshots/issue2.png",
       "status": "in_progress",
-      "reporter": {"name": "Diego Vilca", "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg" },
+      "reporter": {
+        "name": "Diego Vilca",
+        "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
+      },
       "assignee": {
-        "name":"Jorge Ramírez",
-        "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"},
+        "name": "Jorge Ramírez",
+        "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"
+      },
       "submittedAt": "2025-08-20T15:42:30",
       "ticket_option": false
     },
@@ -91,10 +134,14 @@
       "severity": "low",
       "img_url": "https://example.com/screenshots/issue3.png",
       "status": "on_hold",
-      "reporter":{"name": "Valentina Ríos", "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg" },
-      "assignee": {"name": "Pedro Sánchez" ,
-        "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s" }
-    ,
+      "reporter": {
+        "name": "Valentina Ríos",
+        "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg"
+      },
+      "assignee": {
+        "name": "Pedro Sánchez",
+        "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s"
+      },
       "submittedAt": "2025-07-26T15:42:30",
       "ticket_option": true
     },
@@ -108,15 +155,18 @@
       "severity": "critical",
       "img_url": "https://example.com/screenshots/issue4.png",
       "status": "closed",
-      "reporter": {"name": "Isabel Castro", "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg" },
-      "assignee":{
+      "reporter": {
+        "name": "Isabel Castro",
+        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
+      "assignee": {
         "name": "Marta Díaz",
-        "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"},
+        "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
+      },
       "submittedAt": "2025-08-26T15:42:30",
       "resolvedAt": "2024-08-26T15:42:30",
       "ticket_option": true
     },
-
     {
       "id": "101",
       "companyId": "imID",
@@ -127,7 +177,10 @@
       "severity": "high",
       "img_url": "https://example.com/screenshots/issue1.png",
       "status": "open",
-      "reporter": {"name": "Sofía Morales", "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg" },
+      "reporter": {
+        "name": "Sofía Morales",
+        "img_url": "https://i.pinimg.com/1200x/64/86/59/6486596e25b4e609a0ec35bf621c71ab.jpg"
+      },
       "submittedAt": "2024-08-26T15:42:30",
       "ticket_option": true
     },
@@ -141,10 +194,14 @@
       "severity": "medium",
       "img_url": "https://example.com/screenshots/issue2.png",
       "status": "in_progress",
-      "reporter": {"name": "Diego Vilca", "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg" },
+      "reporter": {
+        "name": "Diego Vilca",
+        "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
+      },
       "assignee": {
-        "name":"Jorge Ramírez",
-        "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"},
+        "name": "Jorge Ramírez",
+        "img_url": "https://static.wikitide.net/projectsekaiwiki/thumb/8/82/Kagamine_Rin_V2.png/640px-Kagamine_Rin_V2.png"
+      },
       "submittedAt": "2025-08-20T15:42:30",
       "ticket_option": false
     },
@@ -158,10 +215,14 @@
       "severity": "low",
       "img_url": "https://example.com/screenshots/issue3.png",
       "status": "on_hold",
-      "reporter":{"name": "Valentina Ríos", "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg" },
-      "assignee": {"name": "Pedro Sánchez" ,
-        "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s" }
-    ,
+      "reporter": {
+        "name": "Valentina Ríos",
+        "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg"
+      },
+      "assignee": {
+        "name": "Pedro Sánchez",
+        "img_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe4OzPMUZFtQ-TJxNf5k37h07WhwkJjgkezQ&s"
+      },
       "submittedAt": "2025-07-26T15:42:30",
       "ticket_option": true
     },
@@ -175,10 +236,14 @@
       "severity": "critical",
       "img_url": "https://example.com/screenshots/issue4.png",
       "status": "closed",
-      "reporter": {"name": "Isabel Castro", "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg" },
-      "assignee":{
+      "reporter": {
+        "name": "Isabel Castro",
+        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
+      "assignee": {
         "name": "Marta Díaz",
-        "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"},
+        "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
+      },
       "submittedAt": "2025-08-26T15:42:30",
       "resolvedAt": null,
       "ticket_option": true
@@ -193,20 +258,22 @@
       "severity": "high",
       "img_url": "https://example.com/screenshots/issue1.png",
       "status": "in_progress",
-      "reporter": { "name": "Camilo Herrera", "img_url": "https://i.pinimg.com/736x/c5/7e/ef/c57eef806ed7cc63d24508293553f41b.jpg" },
+      "reporter": {
+        "name": "Camilo Herrera",
+        "img_url": "https://i.pinimg.com/736x/c5/7e/ef/c57eef806ed7cc63d24508293553f41b.jpg"
+      },
       "assignee": {
         "name": "Laura Gómez",
         "img_url": "https://bananapedia.wiki.gg/images/thumb/5/55/BR_Miku.png/300px-BR_Miku.png"
       }
     }
-
   ],
   "users": [
     {
       "id": 1,
       "role_id": 1,
       "company_role_id": 1,
-      "name": "Gabriel Sanchez",
+      "name": "pitote",
       "email": "gabriel.sanchez@acme.com",
       "password": "admin123",
       "company_id": 100,

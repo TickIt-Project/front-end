@@ -18,4 +18,9 @@ export class UsersService {
         return http.get('/users/1');
     }
 
+    updateUser(updateUser) {
+        console.log("se va a updatear el usuario",updateUser);
+        return http.patch('/users/1', updateUser);
+    }
+
 }

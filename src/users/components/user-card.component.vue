@@ -41,12 +41,18 @@
 
         const preview = URL.createObjectURL(file);
 
-        this.$emit('update:profileImage', preview);
+        this.$emit('field-changed', {
+          field: 'profile_image',
+          value: preview
+        });
       },
       saveName(close: () => void) {
         this.$emit('update:name', this.localName);
-        close();
-      },
+
+        this.$emit('field-changed', {
+          field: 'name',
+          value: this.localName
+        })},
       saveEmail(close: () => void) {
         this.$emit('update:email', this.localEmail);
         close();
@@ -88,7 +94,7 @@
               <template #content="{ closeCallback }">
                 <span class="inline-flex items-center gap-2">
                     <pv-input-text v-model="localName" autofocus />
-                    <pv-button icon="pi pi-check" text severity="success" @click="saveName; closeCallback()" />
+                    <pv-button icon="pi pi-check" text severity="success" @click="saveName(closeCallback())" />
                 </span>
               </template>
             </pv-inplace>
@@ -101,7 +107,7 @@
               <template #content="{ closeCallback }">
                 <span class="inline-flex items-center gap-2">
                     <pv-input-text v-model="localEmail" autofocus />
-                    <pv-button icon="pi pi-check" text severity="success" @click="saveEmail; closeCallback()" />
+                    <pv-button icon="pi pi-check" text severity="success" @click="saveEmail(closeCallback())" />
                 </span>
               </template>
             </pv-inplace>
