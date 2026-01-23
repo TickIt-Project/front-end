@@ -67,7 +67,7 @@ export default defineComponent({
         }));
       }
     });
-    this.reportService.getScreenLocationOptions().then((res) => {
+    this.reportService.getScreenLocationByName().then((res) => {
       const assignedToField = this.fields.find(f => f.key === "screen");
       if (assignedToField) {
         assignedToField.options = res.data.map((opt: any) => ({

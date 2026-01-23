@@ -11,6 +11,7 @@ export class IssueReportAssembler {
             reportRaw.title,
             reportRaw.description,
             reportRaw.screen,
+            reportRaw.url,
             reportRaw.companyRole,
             reportRaw.severity,
             reportRaw.img_url ?? null,

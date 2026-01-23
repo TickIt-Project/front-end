@@ -14,9 +14,17 @@ export class IssueReportService {
         return http.get(`/statusOptions`);
     }
 
-    getScreenLocationOptions(){
-        return http.get(`/screenLocations`);
+    getScreenLocationByName(url) {
+        return http.get('/screenLocations').then(res => {
+            const screens = res.data[0];
+
+            const entry = Object.entries(screens)
+                .find(([_, value]) => value.toLowerCase() === url.toLowerCase());
+
+            return entry ? entry[0] : null;
+        });
     }
+
     getIssuesByCompanyId(){
         return http.get(`/issues`);
     }

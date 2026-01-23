@@ -13,12 +13,11 @@ export default {
   data() {
     return {
       formValues: {
-        name: '',
+        title: '',
         description: '',
-        screen: '',
         url: '',
-        company_role: '',
         severity: {},
+        screenResolved: null,
       },
       //todo change url to service
       uploadUrl: 'https://httpbin.org/post',
@@ -34,29 +33,16 @@ export default {
       fields: [
         { name: 'title',       label: this.$t('report.steps.1.fields.title'),          type: 'text', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.title'), initialValue: '' },
         { name: 'description',label: this.$t('report.steps.1.fields.description'),    type: 'editor', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.description'), initialValue: '' },
-        { name: 'screen',        label: this.$t('report.steps.1.fields.screen_issue'),   type: 'select', inputType: 'select',  placeholder: this.$t('report.steps.1.fields.screen_issue'), initialValue: '', editable: true, options:[]},
         { name: 'url',        label: this.$t('report.steps.1.fields.url'),            type: 'text', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.url'), initialValue: '' },
-        { name: 'company_role',        label: this.$t('report.steps.1.fields.role'),   type: 'select', inputType: 'select',  placeholder: this.$t('report.steps.1.fields.role'), initialValue: '', editable: false, options:[] },
         { name: 'severity',        label: this.$t('report.steps.1.fields.severity'),   type: 'select', inputType: 'select',  placeholder: this.$t('report.steps.1.fields.severity'), initialValue: '', editable: false, options:[] },
       ]
     }
   },
   mounted(){
     Promise.all([
-      this.reportService.getRolesOfCompanyByCompanyId(),
       this.reportService.getSeverityOptions(),
-      this.reportService.getScreenLocationOptions()
     ])
-        .then(([rolesRes, severityRes, screenRes]) => {
-          // role loading
-          const roleField = this.fields.find(f => f.name === 'company_role');
-          if (roleField && Array.isArray(rolesRes.data)) {
-            roleField.options = rolesRes.data.map(role => ({
-              label: role,
-              value: role
-            }));
-          }
-
+        .then(([severityRes]) => {
           // severity
           const severityField = this.fields.find(f => f.name === 'severity');
           if (severityField && Array.isArray(severityRes.data)) {
@@ -65,17 +51,6 @@ export default {
               value: sev
             }));
           }
-
-          // screen
-          const screenField = this.fields.find(f => f.name === 'screen');
-          if (screenField && Array.isArray(screenRes.data)) {
-            screenField.options = screenRes.data.map(loc => ({
-              label: loc
-            }));
-          }
-        })
-        .catch(err => {
-          console.error('Error cargando selects:', err);
         });
   },
   methods: {
@@ -85,8 +60,9 @@ export default {
         companyId : null,
         title : formValues.title,
         description : formValues.description,
-        screen : formValues.screen.label,
-        companyRole : formValues.company_role.value,
+        screen : this.screenResolved,
+        url: formValues.url,
+        companyRole : "Advisor",
         severity : formValues.severity.value,
         imgUrl : 'https://preview.redd.it/pls-gib-to-me-facts-lore-about-miku-v0-sfbyk901c82d1.jpeg',
         status : null,
@@ -99,6 +75,18 @@ export default {
       console.log(formValues);
       console.log(report);
       return report;
+  },
+  async convertScreen(url){
+    const parts = url.replace(/^https?:\/\//, '').split('/');
+    const screenPartUrl = parts[1]?.toLowerCase() ?? ''
+    let screenName = await this.reportService.getScreenLocationByName(screenPartUrl)
+
+    if(screenName!= null){
+      return screenName;
+    }
+    else{
+      return screenPartUrl
+    }
   }
   },
   computed: {
@@ -116,23 +104,13 @@ export default {
     },
 
     requiredFieldsFilled() {
-      const urlRequired = this.isScreenIssueTyped;
       return (
           this.titleLength >= 3 &&
           this.descPlainLength > 3 &&
-          !!this.formValues.screen &&
-          !!this.formValues.company_role &&
+          !!this.formValues.url &&
           !!this.formValues.severity &&
-          (!urlRequired || (this.formValues.url && this.formValues.url.trim() !== ''))
+          !!this.formValues.url
       );
-    },
-
-    isScreenIssueTyped() {
-      const field = this.fields.find(f => f.name === 'screen');
-      if (!field) return false;
-      const currentValue = this.formValues.screen || '';
-      const match = field.options.some(opt => opt.value === currentValue);
-      return !match && currentValue.trim() !== '';
     },
 
     formIsValid() {
@@ -141,12 +119,14 @@ export default {
 
   },
   watch: {
-    formValues: {
-      handler() {
-        console.log('formValues', this.formValues);
-        console.log('titleLength', this.titleLength, 'descPlainLength', this.descPlainLength, 'isOverLimit', this.isOverLimit, 'requiredFilled', this.requiredFieldsFilled, 'formIsValid', this.formIsValid);
-      },
-      deep: true
+    'formValues.url': {
+      async handler(newUrl) {
+        if (!newUrl) {
+          this.screenResolved = null;
+          return;
+        }
+        this.screenResolved = await this.convertScreen(newUrl);
+      }
     }
   }
 }
@@ -166,7 +146,6 @@ export default {
                     v-model="formValues[field.name]"
                     :placeholder="field.placeholder"
                     fluid
-                    :disabled="field.name === 'url' && !isScreenIssueTyped"
                     :maxlength="field.name === 'name' ? 100 : undefined"
                 />
                 <label :for="field.name">{{ field.label }}</label>

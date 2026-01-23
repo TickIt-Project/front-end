@@ -19,15 +19,15 @@
     "closed"
   ],
   "screenLocations": [
-    "Login",
-    "Sign Up",
-    "Dashboard",
-    "User Profile",
-    "Settings",
-    "Reports",
-    "Notifications",
-    "Billing",
-    "Support Chat"
+    {"Login":"login",
+    "Sign Up": "signup",
+    "Dashboard": "dashboard",
+    "User Profile": "userProfile",
+    "Settings": "settings",
+    "Reports":  "reports",
+    "Notifications": "notifications",
+    "Billing": "billing",
+    "Support Chat": "support-chat"}
   ],
   "it-members": [
     { "id": 1, "name": "Laura Gómez",
