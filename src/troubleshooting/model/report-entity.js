@@ -6,6 +6,7 @@ export class IssueReportEntity {
                     title = '',
                     description = '',
                     screen = '',
+                    url = '',
                     companyRole = '',
                     severity,
                     imgUrl = '',
@@ -21,6 +22,7 @@ export class IssueReportEntity {
         this.title = title;
         this.description = description;
         this.screen = screen;
+        this.url = url;
         this.companyRole = companyRole;
         this.severity = severity;
         this.imgUrl = imgUrl;
