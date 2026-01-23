@@ -11,8 +11,48 @@
       role: { type: String, required: true },
       company: { type: String, required: true },
       profileImage: { type: String, required: true }
+    },
+    emits: ['update:name', 'update:email', 'update:profileImage'],
+    data() {
+      return {
+        localName: this.name,
+        localEmail: this.email
+      };
+    },
+
+    watch: {
+      name(val) {
+        this.localName = val;
+      },
+      email(val) {
+        this.localEmail = val;
+      }
+    },
+
+    methods: {
+      triggerUpload() {
+        (this.$refs.fileInput as HTMLInputElement).click();
+      },
+
+      onFileSelected(event: Event) {
+        const input = event.target as HTMLInputElement;
+        const file = input.files?.[0];
+        if (!file) return;
+
+        const preview = URL.createObjectURL(file);
+
+        this.$emit('update:profileImage', preview);
+      },
+      saveName(close: () => void) {
+        this.$emit('update:name', this.localName);
+        close();
+      },
+      saveEmail(close: () => void) {
+        this.$emit('update:email', this.localEmail);
+        close();
+      }
     }
-  })
+  });
   </script>
 
   <template>
@@ -20,11 +60,24 @@
       <div class="card">
         <div class="content">
           <div class="header">
-            <img :src="profileImage" alt="Profile" class="avatar" />
+            <div class="avatar-wrapper" @click="triggerUpload">
+              <img :src="profileImage" alt="Profile" class="avatar" />
+
+              <div class="avatar-overlay">
+                <i class="pi pi-pencil"></i>
+              </div>
+
+              <input
+                  ref="fileInput"
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  @change="onFileSelected"
+              />
+            </div>
             <h2 class="company">{{ company }}</h2>
           </div>
           <div class="info">
-            <p></p>
 
             <label for="name">{{$t('user.fields.name')}}</label>
             <pv-inplace>
@@ -34,8 +87,8 @@
               </template>
               <template #content="{ closeCallback }">
                 <span class="inline-flex items-center gap-2">
-                    <pv-input-text v-model="name" autofocus />
-                    <pv-button icon="pi pi-check" text severity="success" @click="closeCallback" />
+                    <pv-input-text v-model="localName" autofocus />
+                    <pv-button icon="pi pi-check" text severity="success" @click="saveName; closeCallback()" />
                 </span>
               </template>
             </pv-inplace>
@@ -47,8 +100,8 @@
               </template>
               <template #content="{ closeCallback }">
                 <span class="inline-flex items-center gap-2">
-                    <pv-input-text v-model="email" autofocus />
-                    <pv-button icon="pi pi-check" text severity="success" @click="closeCallback" />
+                    <pv-input-text v-model="localEmail" autofocus />
+                    <pv-button icon="pi pi-check" text severity="success" @click="saveEmail; closeCallback()" />
                 </span>
               </template>
             </pv-inplace>
@@ -133,5 +186,40 @@
   .role {
     color: var(--contrast-gray);
     text-align: right;
+  }
+
+  .avatar-wrapper {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    cursor: pointer;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .avatar-overlay i {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .avatar-wrapper:hover .avatar-overlay {
+    opacity: 1;
   }
   </style>
