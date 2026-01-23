@@ -12,7 +12,7 @@
       company: { type: String, required: true },
       profileImage: { type: String, required: true }
     },
-    emits: ['update:name', 'update:email', 'update:profileImage'],
+    emits: ['field-changed'],
     data() {
       return {
         localName: this.name,
@@ -47,17 +47,17 @@
         });
       },
       saveName(close: () => void) {
-        this.$emit('update:name', this.localName);
 
         this.$emit('field-changed', {
           field: 'name',
           value: this.localName
         })},
       saveEmail(close: () => void) {
-        this.$emit('update:email', this.localEmail);
-        close();
+        this.$emit('field-changed', {
+          field: 'email',
+          value: this.localEmail
+        })},
       }
-    }
   });
   </script>
 
