@@ -1,0 +1,172 @@
+{
+  "auth": {
+    "placeholders":{
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "password": "Enter your password",
+      "companyId": "Enter the ID of the company"
+    },
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "companyId": "Company ID",
+      "password": "Password"
+    },
+    "welcome_title": "Welcome to",
+    "signup": {
+        "messages": {
+          "email": "Enter a valid email",
+          "name": {
+            "min": "Name must have at least 3 characters",
+            "max": "Name must be under 15 characters"
+          },
+          "companyId": "Enter a valid company ID",
+          "password": "Password must have at least 8 characters"
+
+        },
+      "already_registered": "Already registered?",
+      "sign_in": "Sign in to your account",
+      "button": "Create an account",
+      "slackButton": "Signup with Slack",
+      "welcome_message": "Bridge the gap. Connect with IT effortlessly"
+    },
+    "signIn": {
+      "messages": {
+        "email": "Invalid email",
+        "password": "Invalid password",
+        "notFound": "No matching account found or incorrect password."
+      },
+      "notRegistered": "Not registered yet?",
+      "signUp": "Sign up to TickIT",
+      "button": "Sign in",
+      "slackButton": "Sign in with Slack",
+      "welcome_message": "Let’s solve something today."
+
+    }
+  },
+  "nav": {
+    "report": "Report",
+    "myIssues": "My Issues",
+    "dashboard": "Dashboard",
+    "assignedIssues": "Assigned Issues",
+    "history": "History",
+    "recurrentIssues": "Recurrent Issues"
+  },
+  "report": {
+    "info": {
+      "title": "Report an Issue",
+      "subtitle": "Please describe where and what went wrong as specific as you can."
+    },
+    "steps": {
+      "buttons": {
+        "next": "Next",
+        "back": "Back",
+        "submit": "Submit",
+        "upload": "Upload"
+      },
+      "1": {
+        "header": "Issue Details",
+        "fields": {
+          "title": "Title",
+          "description": "Description",
+          "screen_issue": "Screen of Issue Location",
+          "url": "URL of screen",
+          "role": "User Role",
+          "severity": "Severity"
+        },
+        "characters": "characters",
+        "min3": " cannot be less than 3 characters",
+        "max": " character limit is ",
+        "url": "Invalid URL format"
+      },
+      "2": {
+        "header": "Attachments",
+        "select_img": "Select Image",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "img_text": "Drag or upload any screenshots that could help understand the issue better."
+      },
+      "3": {
+        "header": "Review & Submit",
+        "desc_text": "Make sure the information is correct before sending it to the IT team."
+      }
+
+    }
+  },
+  "user": {
+    "fields": {
+      "name": "Name",
+      "email": "Email"
+    }
+  },
+  "statistics": {
+    "myIssues": {
+      "employee": {
+        "info": {
+          "title": "My Issues",
+          "sub": "All your submitted issues"
+        }
+      },
+      "it": {
+        "info": {
+          "title": "History",
+          "sub": "All closed issues"
+        }
+      }
+    },
+    "searchBy": "Search by",
+    "name": "Name",
+    "fields": {
+      "title": "Title",
+      "assignedTo": "Assigned To",
+      "severity": "Severity",
+      "status": "Status",
+      "submittedAt": "Submitted At",
+      "resolvedAt": "Resolved At",
+      "seeMore": "See More",
+      "reporter": "Reported By",
+      "location": "Location"
+    }
+  },
+  "card": {
+    "assignedMember": "Assigned IT member",
+    "status": "Status",
+    "solvedAt": "Solved At",
+    "takeIssue": "Take Issue",
+    "toastIssueTake":{
+      "takeIssue": {
+        "issueTaken":"Issue Taken",
+        "issue": "Issue",
+        "issueTakenDesc": "Taken Succesfully"
+      },
+
+      "detakeIssue": {
+        "issuedeTaken":"Issue Taken",
+        "issuedeTakenDesc": "Taken Succesfully"
+      }
+    }
+  },
+  "status": {
+    "open": "Open",
+    "in_progress": "In Progress",
+    "on_hold": "On Hold",
+    "closed": "Closed",
+
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "dashboard": {
+    "info": {
+      "title": "Dashboard"
+    },
+    "summary": "Summary",
+    "seeMore": "See More"
+  },
+  "severity": {
+    "tooltip": {
+      "all": "<b style='font-size:14px'>Low</b><br/><span style='font-size:12px'>Minimal impact. The issue does not affect my work and I can continue normally.</span><br/><br/><b style='font-size:14px'>Medium</b><br/><span style='font-size:12px'>Moderate impact. The issue affects my work, but I can still continue with some limitations.</span><br/><br/><b style='font-size:14px'>High</b><br/><span style='font-size:12px'>High impact. The issue significantly blocks my work and requires prompt attention.</span><br/><br/><b style='font-size:14px'>Critical</b><br/><span style='font-size:12px'>Critical impact. I cannot continue my work at all until this issue is resolved.</span>"
+    }
+  }
+}
