@@ -10,9 +10,9 @@
       email: { type: String, required: true },
       role: { type: String, required: true },
       company: { type: String, required: true },
-      imgUrl: { type: String, required: true }
+      profile_image: { type: String, required: true }
     },
-    emits: ['field-changed'],
+    emits: ['update:profile_image', 'field-changed'],
     data() {
       return {
         localName: this.name,
@@ -43,6 +43,7 @@
         if (!file) return;
 
         const preview = URL.createObjectURL(file);
+        this.$emit('update:profile_image', preview);
 
         this.$emit('field-changed', {
           field: 'profile_image',
@@ -98,7 +99,7 @@
         <div class="content">
           <div class="header">
             <div class="avatar-wrapper" @click="triggerUpload">
-              <img :src="imgUrl" alt="Profile" class="avatar" />
+              <img :src="profile_image" alt="Profile" class="avatar" />
 
               <div class="avatar-overlay">
                 <i class="pi pi-pencil"></i>

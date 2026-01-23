@@ -41,7 +41,7 @@ export default defineComponent({
       v-if="user"
       v-model:name="user.name"
       v-model:email="user.email"
-      v-model:imgUrl="user.imgUrl"
+      v-model:profile_image="user.imgUrl"
       :role="user.role"
       :company="user.company"
       @field-changed="onFieldChanged"
