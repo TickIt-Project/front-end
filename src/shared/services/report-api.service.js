@@ -40,4 +40,7 @@ export class IssueReportService {
             status: "in_progress"
         });
     }
+    updateIssueStatus(issueId, status) {
+        return http.patch(`/issues/${issueId}`, { status });
+    }
 }

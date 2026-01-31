@@ -9,19 +9,21 @@ import Toast from 'primevue/toast';
 export default defineComponent({
   name: "report-issue-card",
   components: {PvTag, PvAvatar, Toast},
-  emits: ['detake-issue', 'take-issue'],
+  emits: ['detake-issue', 'take-issue','change-status'],
   data(){
     return{
       severityConfig, statusConfig,
       isTakeIssueDisabled: false,
-      isDeTakeIssueDisabled: false
+      isDeTakeIssueDisabled: false,
+      selectedStatus: this.issue.status
     }
   },
   props: {
     border: Boolean,
     issue: Object,
     fullInformation: Boolean,
-    currentUser: Object
+    currentUser: Object,
+    statusOptions: Array
   },
   methods:{
     clickedTaken(){
@@ -37,12 +39,25 @@ export default defineComponent({
       this.$emit('detake-issue', {
         issueId: this.issue.id
       });
+    },
+    selectStatus() {
+      if (this.selectedStatus === this.issue.status) return;
+
+      this.$emit('change-status', {
+        issueId: this.issue.id,
+        status: this.selectedStatus
+      });
+    },
+    statusLabel(status) {
+      return this.$t(`status.${status}`);
     }},
   computed:{
     issueBelongUser() {
-      console.log("SOY UN ICHU issue>",this.issue,"current>",this.currentUser?.id)
       return this.issue?.assignee?.id === this.currentUser?.id;
-  }}
+  },
+    filteredStatusOptions() {
+      return this.statusOptions.filter(status => status !== 'open');
+    }}
 
 })
 </script>
@@ -104,7 +119,10 @@ export default defineComponent({
       </div>
       <div style="display: flex; justify-content: space-evenly; padding-right: 8%">
         <div class="footerContainer" v-if="issueBelongUser" style="margin-top: 40px">
-          <pv-select :label="$t(`card.detakeIssue`)" severity="Info" @click="clickedDetake()"></pv-select>
+          <pv-select :options="filteredStatusOptions"
+                     :optionLabel="statusLabel"
+                     v-model="selectedStatus"
+                     @change="selectStatus"></pv-select>
         </div>
       </div>
     </template>
