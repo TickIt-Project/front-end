@@ -35,7 +35,7 @@ export default defineComponent({
       },
     clickedDetake(){
       this.isDeTakeIssueDisabled = true;
-      this.$toast.add({ severity: 'info', summary: this.$t(`card.toastIssueTake.detakeIssue.issuedeTaken`), detail: this.$t(`card.toastIssueTake.detakeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.takeIssue.issuedeTakenDesc`), life: 3000 });
+      this.$toast.add({ severity: 'info', summary: this.$t(`card.toastIssueTake.detakeIssue.issuedeTaken`), detail: this.$t(`card.toastIssueTake.detakeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.detakeIssue.issuedeTakenDesc`), life: 3000 });
       this.$emit('detake-issue', {
         issueId: this.issue.id
       });

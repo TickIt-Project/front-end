@@ -108,7 +108,7 @@
       "companyRole": "Product Manager",
       "severity": "medium",
       "img_url": "https://example.com/screenshots/issue2.png",
-      "status": "in_progress",
+      "status": "open",
       "reporter": {
         "name": "Diego Vilca",
         "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
@@ -150,7 +150,7 @@
       "companyRole": "QA Tester",
       "severity": "critical",
       "img_url": "https://example.com/screenshots/issue4.png",
-      "status": "open",
+      "status": "in_progress",
       "reporter": {
         "name": "Isabel Castro",
         "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
