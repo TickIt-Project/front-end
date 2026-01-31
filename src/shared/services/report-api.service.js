@@ -41,6 +41,16 @@ export class IssueReportService {
         });
     }
     updateIssueStatus(issueId, status) {
-        return http.patch(`/issues/${issueId}`, { status });
+        const payload = {
+            status
+        };
+
+        if (status === 'closed' || status === 'cancelled') {
+            payload.resolvedAt = new Date().toISOString();
+        } else {
+            payload.resolvedAt = null;
+        }
+
+        return http.patch(`/issues/${issueId}`, payload);
     }
 }

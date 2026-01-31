@@ -73,6 +73,9 @@ export default defineComponent({
           const issue = this.issues.find(i => i.id === issueId);
           if (issue) {
             issue.status = status;
+            issue.resolvedAt = status === 'closed'
+                ? new Date()
+                : null;
           }
 
           this.computeStatusCount();

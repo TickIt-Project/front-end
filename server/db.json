@@ -150,18 +150,14 @@
       "companyRole": "QA Tester",
       "severity": "critical",
       "img_url": "https://example.com/screenshots/issue4.png",
-      "status": "closed",
+      "status": "open",
       "reporter": {
         "name": "Isabel Castro",
         "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
-      "assignee": {
-        "id": 1,
-        "name": "Gabriel Sanchez",
-        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
-      },
+      "assignee": null,
       "submittedAt": "2025-08-26T15:42:30",
-      "resolvedAt": "2024-08-26T15:42:30",
+      "resolvedAt": null,
       "ticket_option": true
     },
     {
