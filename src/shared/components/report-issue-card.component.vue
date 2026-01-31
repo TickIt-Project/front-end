@@ -5,22 +5,45 @@ import {Avatar as PvAvatar, Tag as PvTag, useToast} from "primevue";
 import Toast from 'primevue/toast';
 
 
+
 export default defineComponent({
   name: "report-issue-card",
   components: {PvTag, PvAvatar, Toast},
+  emits: ['detake-issue', 'take-issue'],
+  data(){
+    return{
+      severityConfig, statusConfig,
+      isTakeIssueDisabled: false,
+      isDeTakeIssueDisabled: false
+    }
+  },
   props: {
     border: Boolean,
-    issue: Object, //objeto clave - valor
-    fullInformation: Boolean
-  },
-  data() {
-    return { severityConfig, statusConfig,isTakeIssueDisabled: false };
+    issue: Object,
+    fullInformation: Boolean,
+    currentUser: Object
   },
   methods:{
     clickedTaken(){
       this.isTakeIssueDisabled = true;
       this.$toast.add({ severity: 'success', summary: this.$t(`card.toastIssueTake.takeIssue.issueTaken`), detail: this.$t(`card.toastIssueTake.takeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.takeIssue.issueTakenDesc`), life: 3000 });
-    }}
+      this.$emit('take-issue', {
+        issueId: this.issue.id
+      });
+      },
+    clickedDetake(){
+      this.isDeTakeIssueDisabled = true;
+      this.$toast.add({ severity: 'info', summary: this.$t(`card.toastIssueTake.detakeIssue.issuedeTaken`), detail: this.$t(`card.toastIssueTake.detakeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.takeIssue.issuedeTakenDesc`), life: 3000 });
+      this.$emit('detake-issue', {
+        issueId: this.issue.id
+      });
+    }},
+  computed:{
+    issueBelongUser() {
+      console.log("SOY UN ICHU issue>",this.issue,"current>",this.currentUser?.id)
+      return this.issue?.assignee?.id === this.currentUser?.id;
+  }}
+
 })
 </script>
 
@@ -56,11 +79,11 @@ export default defineComponent({
       </div>
     </template>
     <template #footer >
-      <div style="display: flex; justify-content: space-evenly;">
+      <div style="display: flex; justify-content: space-evenly; padding-right: 8%">
         <div class="footerContainer" v-if="issue.assignee" >
           <h4>{{$t("card.assignedMember")}}</h4>
           <div style="display: flex; gap: 5px; align-items: center">
-          <pv-avatar :image="issue.assignee.img_url" shape="circle"></pv-avatar>
+          <pv-avatar :image="issue.assignee.profile_image" shape="circle"></pv-avatar>
           <p>{{issue.assignee.name}}</p>
           </div>
         </div>
@@ -74,6 +97,14 @@ export default defineComponent({
         </div>
         <div class="footerContainer" v-if="issue.status === 'open'" style="margin-top: 40px">
           <pv-button :disabled="isTakeIssueDisabled" :label="$t(`card.takeIssue`)" severity="sucess" @click="clickedTaken()"></pv-button>
+        </div>
+        <div class="footerContainer" v-if="issue.status !== 'closed' &&issue.status !== 'open' && issueBelongUser" style="margin-top: 40px">
+          <pv-button :disabled="isDeTakeIssueDisabled" :label="$t(`card.detakeIssue`)" severity="Info" @click="clickedDetake()"></pv-button>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-evenly; padding-right: 8%">
+        <div class="footerContainer" v-if="issueBelongUser" style="margin-top: 40px">
+          <pv-select :label="$t(`card.detakeIssue`)" severity="Info" @click="clickedDetake()"></pv-select>
         </div>
       </div>
     </template>
