@@ -12,7 +12,8 @@ export default defineComponent({
     issue: {
       type: Object,
       required: true
-    }
+    },
+    currentUser: Object
   },
   data(){
     return{
@@ -32,7 +33,7 @@ export default defineComponent({
 
   <pv-dialog v-model:visible="productDialogVisible" modal :showHeader=0 style=" width: 50rem; " :breakpoints="{ '1199px': '75vw', '575px': '90vw' }" :closable=0>
 
-    <report-issue-card :fullInformation="true" :border="false" :issue="issue" style="padding-right: 2rem"></report-issue-card>
+    <report-issue-card :fullInformation="true" :border="false" :issue="issue" style="padding-right: 2rem" :currentUser="currentUser"></report-issue-card>
     <div style="display:flex; justify-content: center; width: 100%;">
       <pv-button label="Cancel" @click="productDialogVisible=false" variant="text" style="width: 8rem;"></pv-button>
     </div>

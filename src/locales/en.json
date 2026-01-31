@@ -133,6 +133,7 @@
     "status": "Status",
     "solvedAt": "Solved At",
     "takeIssue": "Take Issue",
+    "detakeIssue": "Detake Issue",
     "toastIssueTake":{
       "takeIssue": {
         "issueTaken":"Issue Taken",
@@ -141,8 +142,9 @@
       },
 
       "detakeIssue": {
-        "issuedeTaken":"Issue Taken",
-        "issuedeTakenDesc": "Taken Succesfully"
+        "issuedeTaken":"Issue detaken",
+        "issue": "Issue",
+        "issuedeTakenDesc": "Detaken Succesfully"
       }
     }
   },

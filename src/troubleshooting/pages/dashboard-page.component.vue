@@ -5,6 +5,7 @@ import { IssueReportService } from '@/shared/services/report-api.service';
 import DashboardIssueCard from "@/troubleshooting/components/dashboard-issue-card.component.vue";
 import { IssueReportAssembler } from '@/shared/services/report-assembler';
 import TitleSubtitle from "@/shared/components/title-subtitle.component.vue";
+import { UsersService } from '@/shared/services/users-api.service';
 
 export default defineComponent({
   name: "dashboard-page",
@@ -14,16 +15,23 @@ export default defineComponent({
       items:[{label: this.$t('nav.dashboard'), route:"/dashboard"}, {label:this.$t('nav.assignedIssues'), route:"/issues/assigned"},{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.recurrentIssues'), route:"/recurrent"}],
       info: {title: this.$t('dashboard.info.title'), sub: ''},
       issues:[],
+      currentUser:[],
       statusOpt:[],
       statusCount: {},
       reportAssembler: new IssueReportAssembler(),
-      reportService: new IssueReportService()
+      reportService: new IssueReportService(),
+      userService: new UsersService()
     }
   },
   mounted(){
     this.reportService.getStatusOptions().then((res) => {
       this.statusOpt= res.data
       console.log(this.statusOpt)
+    })
+
+    this.userService.getCurrentUser().then((res) => {
+      this.currentUser= res.data
+      console.log("current user",this.currentUser)
     })
 
     this.reportService.getIssuesByCompanyId().then((res) => {
@@ -53,7 +61,7 @@ export default defineComponent({
   <div style="display: flex">
     <div class="issueCardContainer">
       <div class="issueCard" v-for="issue in issues" :key="issue.id">
-        <dashboard-issue-card :issue="issue"></dashboard-issue-card>
+        <dashboard-issue-card :currentUser="currentUser" :issue="issue"></dashboard-issue-card>
       </div>
     </div>
     <pv-fieldset :legend="$t('dashboard.seeMore')" style="width: 100%; margin-right: 20px; height: fit-content; position: sticky; top: 0;">
