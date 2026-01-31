@@ -66,6 +66,23 @@ export default defineComponent({
           console.error(e);
         }
       },
+      async onChangeStatus({ issueId, status }) {
+        try {
+          await this.reportService.updateIssueStatus(issueId, status);
+
+          const issue = this.issues.find(i => i.id === issueId);
+          if (issue) {
+            issue.status = status;
+            issue.resolvedAt = status === 'closed'
+                ? new Date()
+                : null;
+          }
+
+          this.computeStatusCount();
+        } catch (e) {
+          console.error(e);
+        }
+      },
       computeStatusCount() {
         this.statusCount = {};
 
@@ -85,7 +102,7 @@ export default defineComponent({
   <div style="display: flex">
     <div class="issueCardContainer">
       <div class="issueCard" v-for="issue in issues" :key="issue.id">
-        <dashboard-issue-card @take-issue="onTakeIssue" @detake-issue="onDetakeIssue" :currentUser="currentUser" :issue="issue"></dashboard-issue-card>
+        <dashboard-issue-card @change-status="onChangeStatus" @take-issue="onTakeIssue" @detake-issue="onDetakeIssue" :currentUser="currentUser" :issue="issue" :statusOptions="statusOpt"></dashboard-issue-card>
       </div>
     </div>
     <pv-fieldset :legend="$t('dashboard.seeMore')" style="width: 100%; margin-right: 20px; height: fit-content; position: sticky; top: 0;">

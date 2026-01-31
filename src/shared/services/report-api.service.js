@@ -40,4 +40,17 @@ export class IssueReportService {
             status: "in_progress"
         });
     }
+    updateIssueStatus(issueId, status) {
+        const payload = {
+            status
+        };
+
+        if (status === 'closed' || status === 'cancelled') {
+            payload.resolvedAt = new Date().toISOString();
+        } else {
+            payload.resolvedAt = null;
+        }
+
+        return http.patch(`/issues/${issueId}`, payload);
+    }
 }

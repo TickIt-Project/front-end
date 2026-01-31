@@ -9,19 +9,21 @@ import Toast from 'primevue/toast';
 export default defineComponent({
   name: "report-issue-card",
   components: {PvTag, PvAvatar, Toast},
-  emits: ['detake-issue', 'take-issue'],
+  emits: ['detake-issue', 'take-issue','change-status'],
   data(){
     return{
       severityConfig, statusConfig,
       isTakeIssueDisabled: false,
-      isDeTakeIssueDisabled: false
+      isDeTakeIssueDisabled: false,
+      selectedStatus: this.issue.status
     }
   },
   props: {
     border: Boolean,
     issue: Object,
     fullInformation: Boolean,
-    currentUser: Object
+    currentUser: Object,
+    statusOptions: Array
   },
   methods:{
     clickedTaken(){
@@ -33,16 +35,41 @@ export default defineComponent({
       },
     clickedDetake(){
       this.isDeTakeIssueDisabled = true;
-      this.$toast.add({ severity: 'info', summary: this.$t(`card.toastIssueTake.detakeIssue.issuedeTaken`), detail: this.$t(`card.toastIssueTake.detakeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.takeIssue.issuedeTakenDesc`), life: 3000 });
+      this.$toast.add({ severity: 'info', summary: this.$t(`card.toastIssueTake.detakeIssue.issuedeTaken`), detail: this.$t(`card.toastIssueTake.detakeIssue.issue`)+" "+this.issue.id+" "+this.$t(`card.toastIssueTake.detakeIssue.issuedeTakenDesc`), life: 3000 });
       this.$emit('detake-issue', {
         issueId: this.issue.id
       });
+    },
+    selectStatus() {
+      if (this.selectedStatus === this.issue.status) return;
+
+      this.$emit('change-status', {
+        issueId: this.issue.id,
+        status: this.selectedStatus
+      });
+    },
+    statusLabel(status) {
+      return this.$t(`status.${status}`);
     }},
   computed:{
     issueBelongUser() {
-      console.log("SOY UN ICHU issue>",this.issue,"current>",this.currentUser?.id)
       return this.issue?.assignee?.id === this.currentUser?.id;
-  }}
+  },
+    filteredStatusOptions() {
+      if (!this.issue?.status) return this.statusOptions;
+
+      return this.statusOptions.filter(status =>
+          status !== 'open' || status === this.issue.status
+      );
+    }},
+  watch: {
+    'issue.status': {
+      immediate: true,
+      handler(newStatus) {
+        this.selectedStatus = newStatus;
+      }
+    }
+  }
 
 })
 </script>
@@ -104,7 +131,10 @@ export default defineComponent({
       </div>
       <div style="display: flex; justify-content: space-evenly; padding-right: 8%">
         <div class="footerContainer" v-if="issueBelongUser" style="margin-top: 40px">
-          <pv-select :label="$t(`card.detakeIssue`)" severity="Info" @click="clickedDetake()"></pv-select>
+          <pv-select :options="filteredStatusOptions"
+                     :optionLabel="statusLabel"
+                     v-model="selectedStatus"
+                     @change="selectStatus"></pv-select>
         </div>
       </div>
     </template>
