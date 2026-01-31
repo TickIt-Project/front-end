@@ -56,8 +56,20 @@ export default defineComponent({
       return this.issue?.assignee?.id === this.currentUser?.id;
   },
     filteredStatusOptions() {
-      return this.statusOptions.filter(status => status !== 'open');
-    }}
+      if (!this.issue?.status) return this.statusOptions;
+
+      return this.statusOptions.filter(status =>
+          status !== 'open' || status === this.issue.status
+      );
+    }},
+  watch: {
+    'issue.status': {
+      immediate: true,
+      handler(newStatus) {
+        this.selectedStatus = newStatus;
+      }
+    }
+  }
 
 })
 </script>
