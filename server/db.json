@@ -113,13 +113,10 @@
         "name": "Diego Vilca",
         "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
       },
-      "assignee": {
-        "id": 1,
-        "name": "Gabriel Sanchez",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
-      },
+      "assignee": null,
       "submittedAt": "2025-08-20T15:42:30",
-      "ticket_option": false
+      "ticket_option": false,
+      "assigneeId": null
     },
     {
       "id": "103",
@@ -138,10 +135,11 @@
       "assignee": {
         "id": 1,
         "name": "Gabriel Sanchez",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "submittedAt": "2025-07-26T15:42:30",
-      "ticket_option": true
+      "ticket_option": true,
+      "assigneeId": null
     },
     {
       "id": "104",
@@ -155,12 +153,12 @@
       "status": "closed",
       "reporter": {
         "name": "Isabel Castro",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "assignee": {
         "id": 1,
         "name": "Gabriel Sanchez",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "submittedAt": "2025-08-26T15:42:30",
       "resolvedAt": "2024-08-26T15:42:30",
@@ -196,7 +194,7 @@
       "assignee": {
         "id": 1,
         "name": "Gabriel Sanchez",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "submittedAt": "2025-08-20T15:42:30",
       "ticket_option": false
@@ -218,7 +216,7 @@
       "assignee": {
         "id": 1,
         "name": "Gabriel Sanchez",
-        "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "submittedAt": "2025-07-26T15:42:30",
       "ticket_option": true
@@ -241,7 +239,7 @@
       "assignee": {
         "id": 1,
         "name": "Marta Díaz",
-        "img_url": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
+        "profile_image": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
       },
       "submittedAt": "2025-08-26T15:42:30",
       "resolvedAt": null,
@@ -265,7 +263,7 @@
       "assignee": {
         "id": 2,
         "name": "Laura Gómez",
-        "img_url": "https://bananapedia.wiki.gg/images/thumb/5/55/BR_Miku.png/300px-BR_Miku.png"
+        "profile_image": "https://bananapedia.wiki.gg/images/thumb/5/55/BR_Miku.png/300px-BR_Miku.png"
       }
     }
   ],

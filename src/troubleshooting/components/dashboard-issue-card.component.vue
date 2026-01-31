@@ -1,6 +1,5 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
-import { IssueReportEntity } from '../model/report-entity';
 import {Button as PvButton, Dialog as PvDialog, Tag as PvTag} from "primevue";
 import { severityConfig, statusConfig } from '@/shared/services/severity-configurations';
 import ReportIssueCard from "@/shared/components/report-issue-card.component.vue";
@@ -22,10 +21,18 @@ export default defineComponent({
       productDialogVisible : false
     }
   },
+  emits: ['update:profile_image', 'field-changed','detake-issue', 'take-issue'],
   methods:{
     showIssue(){
       this.productDialogVisible = true;
-    }}
+    },
+    onDetakeIssue(payload) {
+      this.$emit('detake-issue', payload);
+    },
+    onTakeIssue(payload) {
+      this.$emit('take-issue', payload);
+    }
+  }
 })
 </script>
 
@@ -33,7 +40,7 @@ export default defineComponent({
 
   <pv-dialog v-model:visible="productDialogVisible" modal :showHeader=0 style=" width: 50rem; " :breakpoints="{ '1199px': '75vw', '575px': '90vw' }" :closable=0>
 
-    <report-issue-card :fullInformation="true" :border="false" :issue="issue" style="padding-right: 2rem" :currentUser="currentUser"></report-issue-card>
+    <report-issue-card @take-issue="onTakeIssue" @detake-issue="onDetakeIssue" :fullInformation="true" :border="false" :issue="issue" style="padding-right: 2rem" :currentUser="currentUser"></report-issue-card>
     <div style="display:flex; justify-content: center; width: 100%;">
       <pv-button label="Cancel" @click="productDialogVisible=false" variant="text" style="width: 8rem;"></pv-button>
     </div>

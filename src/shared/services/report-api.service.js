@@ -28,4 +28,16 @@ export class IssueReportService {
     getIssuesByCompanyId(){
         return http.get(`/issues`);
     }
+    detakeIssue(issueId) {
+        return http.patch(`/issues/${issueId}`, {
+            assignee: null,
+            status: "open"
+        });
+    }
+    takeIssue(issueId, _assignee) {
+        return http.patch(`/issues/${issueId}`, {
+            assignee: _assignee,
+            status: "in_progress"
+        });
+    }
 }
