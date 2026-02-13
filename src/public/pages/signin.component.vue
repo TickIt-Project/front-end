@@ -48,7 +48,7 @@ export default defineComponent({
         const token = response.data.token
         localStorage.setItem('auth_token', token)
 
-        this.$router.push('/dashboard')
+        this.$router.push('/report')
 
       } catch (error) {
         console.error('Error en sign in', error)
