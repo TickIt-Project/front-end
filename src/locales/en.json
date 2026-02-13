@@ -32,7 +32,7 @@
     },
     "signIn": {
       "messages": {
-        "email": "Invalid email",
+        "username": "Invalid username",
         "password": "Invalid password",
         "notFound": "No matching account found or incorrect password."
       },

@@ -2,7 +2,6 @@
 import { IssueReportService } from '@/shared/services/report-api.service.js'
 import {FileUpload as PvFileUpload, Select as PvSelect, Tag as PvTag} from "primevue";
 import {FormField as PvFormField} from "@primevue/forms";
-import {severityConfig} from "@/shared/services/severity-configurations.js";
 import ReportIssueCard from "@/shared/components/report-issue-card.component.vue";
 import {IssueReportAssembler} from "@/shared/services/report-assembler.js";
 
@@ -87,7 +86,24 @@ export default {
     else{
       return screenPartUrl
     }
-  }
+  },
+    async onUpload(event) {
+      const file = event.files[0];
+      if (!file) return;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await this.reportService.uploadImage(formData);
+
+        this.formValues.imgUrl = res.data.url;
+
+        console.log('Imagen subida:', res.data.url);
+      } catch (e) {
+        console.error('Error subiendo imagen', e);
+      }
+    }
   },
   computed: {
     titleLength() {
@@ -215,20 +231,14 @@ export default {
       <pv-step-panel v-slot="{ activateCallback }">
         <div class="content">
           <pv-file-upload
-              name="file"
-              :url="uploadUrl"
               mode="advanced"
+              :customUpload="true"
               :auto="true"
               :multiple="false"
               accept="image/png, image/jpeg"
               :maxFileSize="5 * 1024 * 1024"
               dragDrop
-              :chooseLabel="$t('report.steps.2.select_img')"
-              :uploadLabel="$t('report.steps.2.upload')"
-              :cancelLabel="$t('report.steps.2.cancel')"
-              :showUploadButton="false"
-              @upload="onUpload"
-              @error="onError"
+              @uploader="onUpload"
           >
             <template #empty>
               <div class="fileUpload">

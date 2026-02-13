@@ -1,8 +1,9 @@
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 import ParallaxDecoration from "@/public/components/parallax-decoration.component.vue";
 import NavHeader from "@/public/components/nav-header.component.vue";
 import AuthForm from "@/shared/components/auth-form.component.vue";
+import { AuthService } from '@/public/services/auth-api.service';
 
 //resolver
 import {zodResolver} from "@primevue/forms/resolvers/zod";
@@ -15,9 +16,12 @@ export default defineComponent({
     return {
       resolver: zodResolver(
           z.object({
-            email: z
-                .email({ message: this.$t('auth.signIn.messages.email') }),
-            password: z.string().min(8, { message: this.$t('auth.signIn.messages.password') }),
+            username: z
+                .string()
+                .min(3, { message: this.$t('auth.signIn.messages.username') }),
+            password: z
+                .string()
+                .min(8, { message: this.$t('auth.signIn.messages.password') }),
           })
       ),
       /**
@@ -25,14 +29,30 @@ export default defineComponent({
        * @description Defines the structure of form fields to be rendered dynamically
        */
       fields: [
-        { name: 'name',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
+        { name: 'username',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
         { name: 'password',   label: this.$t('auth.labels.password'),type: 'password', inputType: 'password', placeholder: this.$t('auth.placeholders.password'), initialValue: '' },
-      ]
+      ],
+      authService: new AuthService(),
     };
   },
   methods: {
     handleSlackSignIn() {
       console.log("Usuario quiere signin con Slack");
+    },
+    async onFormSubmit(formData) {
+      console.log(formData)
+
+      try {
+        const response = await this.authService.signIn(formData)
+
+        const token = response.data.token
+        localStorage.setItem('auth_token', token)
+
+        this.$router.push('/dashboard')
+
+      } catch (error) {
+        console.error('Error en sign in', error)
+      }
     }
   }
 })
@@ -53,10 +73,10 @@ export default defineComponent({
         <auth-form
             :resolver="resolver"
             :fields="fields"
-            :onFormSubmit="onFormSubmit"
             :submitButton = "$t('auth.signIn.button')"
             :slack_label="$t('auth.signIn.slackButton')"
-            @slack-event="handleSlackSignIn">
+            @slack-event="handleSlackSignIn"
+            @submit-form="onFormSubmit">
         </auth-form>
         <div class="url-links">
           <p>

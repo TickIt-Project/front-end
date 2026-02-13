@@ -121,8 +121,7 @@
       "assignee": null,
       "submittedAt": "2025-08-20T15:42:30",
       "ticket_option": false,
-      "assigneeId": null,
-      "resolvedAt": null
+      "assigneeId": null
     },
     {
       "id": "103",
@@ -133,16 +132,19 @@
       "companyRole": "Desarrollador",
       "severity": "low",
       "img_url": "https://example.com/screenshots/issue3.png",
-      "status": "closed",
+      "status": "on_hold",
       "reporter": {
         "name": "Valentina Ríos",
         "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg"
       },
-      "assignee": null,
+      "assignee": {
+        "id": 1,
+        "name": "Gabriel Sanchez",
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
       "submittedAt": "2025-07-26T15:42:30",
       "ticket_option": true,
-      "assigneeId": null,
-      "resolvedAt": "2026-01-31T02:02:37.641Z"
+      "assigneeId": null
     },
     {
       "id": "104",
@@ -158,13 +160,17 @@
         "name": "Isabel Castro",
         "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
-      "assignee": null,
+      "assignee": {
+        "id": 1,
+        "name": "Gabriel Sanchez",
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
       "submittedAt": "2025-08-26T15:42:30",
-      "resolvedAt": "2026-01-31T02:02:46.328Z",
+      "resolvedAt": "2024-08-26T15:42:30",
       "ticket_option": true
     },
     {
-      "id": "201",
+      "id": "101",
       "companyId": "imID",
       "title": "Error en login",
       "description": "Al intentar iniciar sesión, el sistema devuelve un error 500.",
@@ -177,7 +183,7 @@
       "ticket_option": true
     },
     {
-      "id": "202",
+      "id": "102",
       "companyId": "imID",
       "title": "Mejora en dashboard",
       "description": "Se solicita agregar filtros adicionales en el dashboard principal.",
@@ -185,17 +191,21 @@
       "companyRole": "Product Manager",
       "severity": "medium",
       "img_url": "https://example.com/screenshots/issue2.png",
-      "status": "open",
+      "status": "in_progress",
       "reporter": {
         "name": "Diego Vilca",
         "img_url": "https://i.pinimg.com/736x/ef/53/75/ef53754445bba20148939f87deca606c.jpg"
       },
-      "assignee": null,
+      "assignee": {
+        "id": 1,
+        "name": "Gabriel Sanchez",
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
       "submittedAt": "2025-08-20T15:42:30",
       "ticket_option": false
     },
     {
-      "id": "203",
+      "id": "103",
       "companyId": "imID",
       "title": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m",
       "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper ipsum rutrum nunc. Nunc nonummy metus. Vestibulum volutpat pretium libero. Cras id dui. Aenean ut eros et nisl sagittis vestibulum. Nullam nulla eros, ultricies sit amet, nonummy id, imperdiet feugiat, pede. Sed lectus. Donec mollis hendrerit risus. Phasellus nec sem in justo pellentesque facilisis. Etiam imperdiet imperdiet orci. Nunc nec neque. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Maecenas malesuada. Praesent congue erat at massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu. Phasellus accumsan cursus velit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Phasellus consectetuer vestibulum elit. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc. Vestibulum fringilla pede sit amet augue. In turpis. Pellentesque posuere. Praesent turpis. Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam. Pellentesque ut neque. P",
@@ -203,17 +213,21 @@
       "companyRole": "Desarrollador",
       "severity": "low",
       "img_url": "https://example.com/screenshots/issue3.png",
-      "status": "open",
+      "status": "on_hold",
       "reporter": {
         "name": "Valentina Ríos",
         "img_url": "https://i.pinimg.com/1200x/a6/85/31/a68531e3851b9bf3c50955356e2c316e.jpg"
       },
-      "assignee": null,
+      "assignee": {
+        "id": 1,
+        "name": "Gabriel Sanchez",
+        "profile_image": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
+      },
       "submittedAt": "2025-07-26T15:42:30",
       "ticket_option": true
     },
     {
-      "id": "204",
+      "id": "104",
       "companyId": "imID",
       "title": "Validación en formulario de registro",
       "description": "El campo de correo electrónico permite direcciones inválidas al registrarse.",
@@ -228,7 +242,7 @@
         "img_url": "https://i.pinimg.com/736x/6a/0e/5e/6a0e5ef8bdc00a9b275ef50008d54814.jpg"
       },
       "assignee": {
-        "id": 7,
+        "id": 1,
         "name": "Marta Díaz",
         "profile_image": "https://cdn-images.dzcdn.net/images/cover/bce09b41ab9f0c9c75b6015fa9e53983/0x1900-000000-80-0-0.jpg"
       },
@@ -237,7 +251,7 @@
       "ticket_option": true
     },
     {
-      "id": "205",
+      "id": "105",
       "companyId": "imID",
       "title": "Notifications",
       "description": "Al intentar iniciar sesión, el sistema devuelve un error 500.",

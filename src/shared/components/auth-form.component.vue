@@ -3,12 +3,17 @@
 
 export default{
   name: "auth-form",
+  emits: ['submit-form', 'slack-event'],
   props: {
     resolver: Function,
     fields: Array,
-    onFormSubmit: Function,
     submitButton: String,
     slack_label: String
+  },
+  methods: {
+    handleSubmit({ values }) {
+      this.$emit('submit-form', values)
+    }
   }
 }
 </script>
@@ -16,11 +21,11 @@ export default{
 
 <template>
     <div class="form" >
-      <pv-form :resolver="resolver" @submit="onFormSubmit" class="formFields">
+      <pv-form :resolver="resolver" @submit="handleSubmit" class="formFields">
         <pv-form-field v-for="field in fields" :key="field.name" v-slot="$field" as="section" :name="field.name" :initialValue="field.initialValue" >
           <label :for="field.name">{{ field.label }}</label>
-          <pv-input-text  v-if="field.type === 'text' || field.type === 'number'" :type="field.inputType" :placeholder="field.placeholder" fluid />
-          <pv-password    v-if="field.type === 'password'" :type="field.inputType" :placeholder="field.placeholder" :feedback="false" toggleMask fluid />
+          <pv-input-text  v-model="$field.value" v-if="field.type === 'text' || field.type === 'number'" :type="field.inputType" :placeholder="field.placeholder" fluid />
+          <pv-password    v-model="$field.value" v-if="field.type === 'password'" :type="field.inputType" :placeholder="field.placeholder" :feedback="false" toggleMask fluid />
           <pv-message     v-if="$field?.invalid" severity="error" size="small" variant="simple">{{ $field.error?.message }}</pv-message>
         </pv-form-field>
         <div class="buttons">
