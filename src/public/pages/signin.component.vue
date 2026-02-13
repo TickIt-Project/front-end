@@ -5,7 +5,7 @@ import NavHeader from "@/public/components/nav-header.component.vue";
 import AuthForm from "@/shared/components/auth-form.component.vue";
 import { AuthService } from '@/public/services/auth-api.service';
 
-//resolver
+
 import {zodResolver} from "@primevue/forms/resolvers/zod";
 import {z} from "zod";
 

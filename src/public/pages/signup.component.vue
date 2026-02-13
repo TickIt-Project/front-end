@@ -1,8 +1,9 @@
-<script lang="ts">
+<script>
 import {defineComponent} from 'vue'
 import ParallaxDecoration from "@/public/components/parallax-decoration.component.vue";
 import NavHeader from "@/public/components/nav-header.component.vue";
 import AuthForm from "@/shared/components/auth-form.component.vue";
+import { AuthService } from '@/public/services/auth-api.service';
 
 //resolver
 import {zodResolver} from "@primevue/forms/resolvers/zod";
@@ -17,8 +18,8 @@ export default defineComponent({
           z.object({
             email: z
                 .email({ message: this.$t('auth.signup.messages.email') }),
-            name: z.string().min(3, { message: this.$t('auth.signup.messages.name.min') }).max(15, { message: 'auth.signup.messages.name.max' }),
-            companyId: z.string().min(6, { message: this.$t('auth.signup.messages.companyId') }),
+            username: z.string().min(3, { message: this.$t('auth.signup.messages.name.min') }).max(15, { message: 'auth.signup.messages.name.max' }),
+            companyCode: z.string().min(6, { message: this.$t('auth.signup.messages.companyId') }),
             password: z.string().min(8, { message: this.$t('auth.signup.messages.password') }),
           })
       ),
@@ -27,16 +28,40 @@ export default defineComponent({
        * @description Defines the structure of form fields to be rendered dynamically
        */
       fields: [
-        { name: 'name',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
+        { name: 'username',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
         { name: 'email',      label: this.$t('auth.labels.email'),type: 'text', inputType: 'text',            placeholder: this.$t('auth.placeholders.email'), initialValue: '' },
         { name: 'password',   label: this.$t('auth.labels.password'),type: 'password', inputType: 'password', placeholder: this.$t('auth.placeholders.password'), initialValue: '' },
-        { name: 'companyId',  label: this.$t('auth.labels.companyId'),type: 'text', inputType: 'text',        placeholder: this.$t('auth.placeholders.companyId'), initialValue: '' },
-      ]
+        { name: 'companyCode',  label: this.$t('auth.labels.companyId'),type: 'text', inputType: 'text',        placeholder: this.$t('auth.placeholders.companyId'), initialValue: '' },
+      ],
+      authService: new AuthService(),
     };
   },
   methods: {
     handleSlackSignUp() {
       console.log("Usuario quiere signup con Slack");
+    },
+    async onFormSubmit(formData) {
+      try {
+        const payload = {
+          ...formData,
+          "companyRoleId": "31000000-0000-0000-0000-000000000000",
+          "role": "EMPLOYEE",
+          "language": "EN",
+          "notify_active": true,
+          "profileImageUrl": "https://cdn.pfps.gg/pfps/2301-default-2.png"
+        }
+
+        console.log(payload)
+
+        let response = await this.authService.signUp(payload)
+
+        console.log(response)
+
+        this.$router.push('/signIn')
+
+      } catch (error) {
+        console.error('Error en sign up', error)
+      }
     }
   }
 })
@@ -57,10 +82,10 @@ export default defineComponent({
         <auth-form
             :resolver="resolver"
             :fields="fields"
-            :onFormSubmit="onFormSubmit"
             :submitButton = "$t('auth.signup.button')"
             :slack_label="$t('auth.signup.slackButton')"
-            @slack-event="handleSlackSignUp">
+            @slack-event="handleSlackSignUp"
+            @submit-form="onFormSubmit">
         </auth-form>
         <div class="url-links">
           <p>
