@@ -46,14 +46,20 @@ export default defineComponent({
           ...formData,
           "companyRoleId": "31000000-0000-0000-0000-000000000000",
           "role": "EMPLOYEE",
-          "language": "EN",
+          "language": "ES",
           "notify_active": true,
           "profileImageUrl": "https://cdn.pfps.gg/pfps/2301-default-2.png"
         }
 
-        console.log(payload)
+        const fd = new FormData()
 
-        let response = await this.authService.signUp(payload)
+        fd.append(
+            "user",
+            new Blob([JSON.stringify(payload)], {
+              type: "application/json"
+            })
+        )
+        let response = await this.authService.signUp(fd)
 
         console.log(response)
 
