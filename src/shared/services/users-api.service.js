@@ -2,8 +2,8 @@ import { http } from "@/shared/services/http-common.js";
 
 export class UsersService {
 
-    getEmployeesByCompanyId() {
-        return http.get(`/employees`);
+    getUserByUserId(userId) {
+        return http.get(`users/${userId}`);
     }
 
     getITMembersByCompanyId() {

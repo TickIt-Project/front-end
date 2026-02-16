@@ -8,6 +8,7 @@ import { AuthService } from '@/public/services/auth-api.service';
 
 import {zodResolver} from "@primevue/forms/resolvers/zod";
 import {z} from "zod";
+import {UsersService} from "@/shared/services/users-api.service.js";
 
 export default defineComponent({
   name: "signin",
@@ -33,6 +34,7 @@ export default defineComponent({
         { name: 'password',   label: this.$t('auth.labels.password'),type: 'password', inputType: 'password', placeholder: this.$t('auth.placeholders.password'), initialValue: '' },
       ],
       authService: new AuthService(),
+      userService: new UsersService(),
     };
   },
   methods: {
@@ -48,10 +50,29 @@ export default defineComponent({
         const token = response.data.token
         localStorage.setItem('auth_token', token)
 
+        const userId = response.data.userId
+        localStorage.setItem('userId', userId)
+
         this.$router.push('/report')
 
       } catch (error) {
-        console.error('Error en sign in', error)
+        console.error('Error in sign in', error)
+      }
+
+      try {
+        const response = await this.userService.getUserByUserId(formData)
+
+        const companyRoleId = response.data.companyRoleId
+        localStorage.setItem('company_role_id', companyRoleId)
+
+        //todo add to local storage Company Id from get user by id
+
+        localStorage.setItem('CompanyId', "83510a22-3160-4cec-b78b-74f35e706580")
+
+        this.$router.push('/report')
+
+      } catch (error) {
+        console.error('Error in get user by id', error)
       }
     }
   }
