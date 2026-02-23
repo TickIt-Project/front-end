@@ -50,7 +50,8 @@
     "dashboard": "Dashboard",
     "assignedIssues": "Assigned Issues",
     "history": "History",
-    "recurrentIssues": "Recurrent Issues"
+    "recurrentIssues": "Recurrent Issues",
+    "manageCompany": "Manage Company"
   },
   "report": {
     "info": {
@@ -171,5 +172,11 @@
     "tooltip": {
       "all": "<b style='font-size:14px'>Low</b><br/><span style='font-size:12px'>Minimal impact. The issue does not affect my work and I can continue normally.</span><br/><br/><b style='font-size:14px'>Medium</b><br/><span style='font-size:12px'>Moderate impact. The issue affects my work, but I can still continue with some limitations.</span><br/><br/><b style='font-size:14px'>High</b><br/><span style='font-size:12px'>High impact. The issue significantly blocks my work and requires prompt attention.</span><br/><br/><b style='font-size:14px'>Critical</b><br/><span style='font-size:12px'>Critical impact. I cannot continue my work at all until this issue is resolved.</span>"
     }
+  },
+  "manageCompany": {
+    "companyCode": "Company Code",
+    "copiedSuccesfully": "Copied!",
+    "connectTo": "Connect To",
+    "companyMembers": "Company Members"
   }
 }

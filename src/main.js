@@ -25,7 +25,7 @@ import {
     Message, MultiSelect,
     Password,
     Select,
-    Tag, ToastService, Tooltip
+    Tag, Tooltip
 } from "primevue";
 import {definePreset} from "@primeuix/themes";
 
@@ -37,6 +37,8 @@ import Step from 'primevue/step';
 import StepPanel from 'primevue/steppanel';
 import Editor from "primevue/editor";
 
+
+import ToastService from 'primevue/toastservice';
 
 // Default App Instance
 const app = createApp(App);

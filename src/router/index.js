@@ -19,7 +19,7 @@ const MyIssuesComponent = () => import("../statistics/pages/my-issues-employee.c
 const HistoryComponent = () => import("../statistics/pages/history-it-page.component.vue");
 const DashboardComponent = () => import("../troubleshooting/pages/dashboard-page.component.vue");
 const RecurrentPagesComponent = () => import("../statistics/pages/recurrent-issues-pages.vue");
-const ManageCompanyComponent = () => import("../company/pages/manage-company.component.vue");
+const ManageCompanyComponent = () => import("../company/pages/manage-company-page.component.vue");
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
