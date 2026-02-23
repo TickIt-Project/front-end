@@ -19,8 +19,8 @@ import {
     Button,
     Card, Column, DataTable, DatePicker, Dialog, Fieldset,
     FileUpload,
-    FloatLabel,
-    Inplace,
+    FloatLabel, IconField,
+    Inplace, InputIcon,
     InputText,
     Message, MultiSelect,
     Password,
@@ -96,6 +96,8 @@ app.use(PrimeVue, { theme: {
     .component('pv-multi-select',MultiSelect)
     .component('pv-dialog', Dialog)
     .component('pv-fieldset', Fieldset)
+    .component('pv-icon-field', IconField)
+    .component('pv-input-icon', InputIcon)
 
 
 

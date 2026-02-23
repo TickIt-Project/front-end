@@ -23,5 +23,9 @@ export class UsersService {
         return http.patch('/users/1', updateUser);
     }
 
+    getEmployeesByCompanyId(CompanyId) {
+        return http.get(`/users/${CompanyId}/roles?role=EMPLOYEE`);
+    }
+
 
 }

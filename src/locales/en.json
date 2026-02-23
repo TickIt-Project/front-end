@@ -177,6 +177,12 @@
     "companyCode": "Company Code",
     "copiedSuccesfully": "Copied!",
     "connectTo": "Connect To",
-    "companyMembers": "Company Members"
+    "companyMembers": "Company Members",
+    "table": {
+      "fields": {
+        "name": "Name",
+        "email": "Email"
+      }
+    }
   }
 }

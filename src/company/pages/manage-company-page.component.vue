@@ -2,19 +2,48 @@
 import {defineComponent} from 'vue'
 import NavHeader from "@/public/components/nav-header.component.vue";
 import TitleSubtitle from "@/shared/components/title-subtitle.component.vue";
-import {Button as PvButton} from "primevue";
+import {
+  Button as PvButton,
+  Column as PvColumn,
+  DataTable as PvDataTable,
+  InputText as PvInputText,
+  MultiSelect as PvMultiSelect, Select as PvSelect
+} from "primevue";
+import {FilterMatchMode, FilterOperator} from "@primevue/core/api";
+import {UsersService} from "@/shared/services/users-api.service.js";
 
 
 export default defineComponent({
   name: "manage-company-page.component",
-  components: {PvButton, TitleSubtitle, NavHeader},
+  components: {PvSelect, PvMultiSelect, PvColumn, PvInputText, PvDataTable, PvButton, TitleSubtitle, NavHeader},
   data(){
     return{
       items:[{label: this.$t('nav.dashboard'), route:"/dashboard"}, {label:this.$t('nav.assignedIssues'), route:"/issues/assigned"},{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.recurrentIssues'), route:"/recurrent"},,{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.manageCompany'), route:"/manageCompany"}],
       info: {title: "Banco del peru", sub:""},
       copied: false,
-      code: null
+      code: null,
+
+      filters:{
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+        email: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+      },
+      fields:[
+        { key: "name", title: this.$t('manageCompany.table.fields.name'), type: "text" },
+        { key: "email", title: this.$t('manageCompany.table.fields.email'), type: "text"}
+      ],
+      employees:[],
+      usersService: new UsersService(),
     }
+  },
+  async mounted() {
+    const response = await this.usersService.getEmployeesByCompanyId(
+        localStorage.getItem("company_id")
+    )
+
+    this.employees = response.data
+
+    console.log(this.employees)
   },
   methods: {
     async copyCode() {
@@ -79,6 +108,38 @@ export default defineComponent({
   <div class="companyMembers">
     <h1>{{$t('manageCompany.companyMembers')}}</h1>
   </div>
+
+  <pv-data-table v-model:filters="filters" :value="employees" paginator :rows="10" dataKey="id" filterDisplay="row" :loading="loading"
+             :globalFilterFields="['name', 'email']">
+    <template #header>
+      <div class="flex justify-end">
+        <pv-icon-field>
+          <pv-input-icon>
+            <i class="pi pi-search" />
+          </pv-input-icon>
+          <pv-input-text v-model="filters['global'].value" placeholder="Keyword Search" />
+        </pv-icon-field>
+      </div>
+    </template>
+    <template #empty> No employees found. </template>
+    <template #loading> Loading employees data. Please wait. </template>
+    <pv-column field="name" header="Name" style="min-width: 12rem">
+      <template #body="{ data }">
+        {{ data.name }}
+      </template>
+      <template #filter="{ filterModel, filterCallback }">
+        <pv-input-text v-model="filterModel.value" type="text" @input="filterCallback()" placeholder="Search by name" />
+      </template>
+    </pv-column>
+    <pv-column header="email" filterField="email" style="min-width: 12rem">
+      <template #body="{ data }">
+        {{ data.email }}
+      </template>
+      <template #filter="{ filterModel, filterCallback }">
+        <pv-input-text v-model="filterModel.value" type="text" @input="filterCallback()" placeholder="Search by country" />
+      </template>
+    </pv-column>
+  </pv-data-table>
 </template>
 
 <style scoped>

@@ -44,7 +44,7 @@ export default defineComponent({
       try {
         const payload = {
           ...formData,
-          "companyRoleId": "b1d03f6a-104a-11f1-b65a-64497d04c4fe",
+          "companyRoleId": "0aa012cf-1053-11f1-b65a-64497d04c4fe",
           "role": "EMPLOYEE",
           "language": "ES",
           "notify_active": true,
