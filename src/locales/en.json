@@ -68,11 +68,12 @@
         "header": "Issue Details",
         "fields": {
           "title": "Title",
-          "description": "Description",
+          "deatailed_comments": "Detailed Comments",
           "screen_issue": "Screen of Issue Location",
           "url": "URL of screen",
           "role": "User Role",
-          "severity": "Severity"
+          "severity": "Severity",
+          "category": "Category"
         },
         "characters": "characters",
         "min3": " cannot be less than 3 characters",

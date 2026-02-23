@@ -51,25 +51,23 @@ export default defineComponent({
         localStorage.setItem('auth_token', token)
 
         const userId = response.data.userId
-        localStorage.setItem('userId', userId)
+        console.log(userId);
+        localStorage.setItem('user_id', userId)
 
-        this.$router.push('/report')
+        const companyId = response.data.companyId
+        localStorage.setItem('company_id', companyId)
 
       } catch (error) {
         console.error('Error in sign in', error)
       }
 
       try {
-        const response = await this.userService.getUserByUserId(formData)
+        const response = await this.userService.getUserByUserId(localStorage.getItem('user_id'))
 
         const companyRoleId = response.data.companyRoleId
         localStorage.setItem('company_role_id', companyRoleId)
 
-        //todo add to local storage Company Id from get user by id
-
-        localStorage.setItem('CompanyId', "83510a22-3160-4cec-b78b-74f35e706580")
-
-        this.$router.push('/report')
+        this.$router.push('/issues/reported')
 
       } catch (error) {
         console.error('Error in get user by id', error)

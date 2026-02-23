@@ -16,8 +16,8 @@ export class IssueReportAssembler {
             reportRaw.severity,
             reportRaw.img_url ?? null,
             reportRaw.status,
-            reportRaw.reporter,
-            reportRaw.assignee ?? null,
+            reportRaw.reporterId,
+            reportRaw.assigneeId ?? null,
             reportRaw.resolvedAt ? new Date(reportRaw.resolvedAt) : null,
             reportRaw.submittedAt ? new Date(reportRaw.submittedAt) : null,
             reportRaw.ticketOption, //this is for jira

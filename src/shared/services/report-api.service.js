@@ -2,6 +2,14 @@ import { http } from "@/shared/services/http-common.js";
 
 export class IssueReportService {
 
+    createReport(formData) {
+        return http.post('/reports', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
+
     getRolesOfCompanyByCompanyId() {
         return http.get(`/rolesCompany`);
     }
@@ -12,6 +20,10 @@ export class IssueReportService {
 
     getStatusOptions(){
         return http.get(`/statusOptions`);
+    }
+
+    createIssueReport(formData){
+        return http.post(`/issue-reports/issue-report`,formData);
     }
 
     getScreenLocationByName(url) {
