@@ -72,38 +72,76 @@ export default defineComponent({
           <div class="companyCode">
             <h3 class="code">{{ code || 'BECHEPE' }}</h3>
           </div>
-          <pv-button :label="$t('manageCompany.copyCompanyCode')" icon="pi pi-copy" @click="copyCode"></pv-button>
+          <pv-button class="copyCompanyCode"  :label="$t('manageCompany.copyCompanyCode')" icon="pi pi-copy" @click="copyCode"></pv-button>
 
       </div>
     </div>
 
-    <div class="connectButtons">
-      <h2>{{ $t('manageCompany.integrations') }}</h2>
-      <pv-button severity="secondary">
+    <div class="integrations">
 
-        <span class="btn-content">
-          <div>
-          <svg
-              class="custom-icon"
-              viewBox="0 0 100 100"
-              xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-                fill="#5E6AD2"
-                d="M1.225 61.523c-.222-.949.908-1.546 1.597-.857l36.512 36.512c.69.69.092 1.82-.857 1.597-18.425-4.323-32.93-18.827-37.252-37.252ZM.002 46.889a.99.99 0 0 0 .29.76L52.35 99.71c.201.2.478.307.76.29 2.37-.149 4.695-.46 6.963-.927.765-.157 1.03-1.096.478-1.648L2.576 39.448c-.552-.551-1.491-.286-1.648.479a50.067 50.067 0 0 0-.926 6.962ZM4.21 29.705a.988.988 0 0 0 .208 1.1l64.776 64.776c.289.29.726.375 1.1.208a49.908 49.908 0 0 0 5.185-2.684.981.981 0 0 0 .183-1.54L8.436 24.336a.981.981 0 0 0-1.541.183 49.896 49.896 0 0 0-2.684 5.185Zm8.448-11.631a.986.986 0 0 1-.045-1.354C21.78 6.46 35.111 0 49.952 0 77.592 0 100 22.407 100 50.048c0 14.84-6.46 28.172-16.72 37.338a.986.986 0 0 1-1.354-.045L12.659 18.074Z"
-            />
-          </svg>
+
+      <div class="integration-card">
+        <div class="left">
+          <div class="logo linear">
+            <svg class="custom-icon" preserveAspectRatio="xMidYMid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -30.632388516510233 255.324 285.95638851651023"><linearGradient id="a"><stop offset=".18" stop-color="#0052cc"/><stop offset="1" stop-color="#2684ff"/></linearGradient><linearGradient id="b" x1="98.031%" x2="58.888%" xlink:href="#a" y1=".161%" y2="40.766%"/><linearGradient id="c" x1="100.665%" x2="55.402%" xlink:href="#a" y1=".455%" y2="44.727%"/><path d="M244.658 0H121.707a55.502 55.502 0 0 0 55.502 55.502h22.649V77.37c.02 30.625 24.841 55.447 55.466 55.467V10.666C255.324 4.777 250.55 0 244.658 0z" fill="#2684ff"/><path d="M183.822 61.262H60.872c.019 30.625 24.84 55.447 55.466 55.467h22.649v21.938c.039 30.625 24.877 55.43 55.502 55.43V71.93c0-5.891-4.776-10.667-10.667-10.667z" fill="url(#b)"/><path d="M122.951 122.489H0c0 30.653 24.85 55.502 55.502 55.502h22.72v21.867c.02 30.597 24.798 55.408 55.396 55.466V133.156c0-5.891-4.776-10.667-10.667-10.667z" fill="url(#c)"/></svg>
           </div>
-          {{ $t('manageCompany.connectTo') }} Linear
-        </span>
-      </pv-button>
-      <pv-button severity="secondary">
-        <span class="btn-content">
-          <svg  class="custom-icon" preserveAspectRatio="xMidYMid" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -30.632388516510233 255.324 285.95638851651023"><linearGradient id="a"><stop offset=".18" stop-color="#0052cc"/><stop offset="1" stop-color="#2684ff"/></linearGradient><linearGradient id="b" x1="98.031%" x2="58.888%" xlink:href="#a" y1=".161%" y2="40.766%"/><linearGradient id="c" x1="100.665%" x2="55.402%" xlink:href="#a" y1=".455%" y2="44.727%"/><path d="M244.658 0H121.707a55.502 55.502 0 0 0 55.502 55.502h22.649V77.37c.02 30.625 24.841 55.447 55.466 55.467V10.666C255.324 4.777 250.55 0 244.658 0z" fill="#2684ff"/><path d="M183.822 61.262H60.872c.019 30.625 24.84 55.447 55.466 55.467h22.649v21.938c.039 30.625 24.877 55.43 55.502 55.43V71.93c0-5.891-4.776-10.667-10.667-10.667z" fill="url(#b)"/><path d="M122.951 122.489H0c0 30.653 24.85 55.502 55.502 55.502h22.72v21.867c.02 30.597 24.798 55.408 55.396 55.466V133.156c0-5.891-4.776-10.667-10.667-10.667z" fill="url(#c)"/></svg>
 
-          {{ $t('manageCompany.connectTo') }} Jira
-        </span>
-      </pv-button>
+          <div class="info">
+            <h3>Linear</h3>
+            <span class="link">{{$t('manageCompany.manageSync')}}</span>
+          </div>
+        </div>
+
+        <div class="status connected">{{$t('manageCompany.connected')}}</div>
+      </div>
+
+
+
+      <div class="integration-card">
+        <div class="left">
+          <div class="logo jira">
+            <svg class="custom-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" > <path fill="#5E6AD2" d="M1.225 61.523c-.222-.949.908-1.546 1.597-.857l36.512 36.512c.69.69.092 1.82-.857 1.597-18.425-4.323-32.93-18.827-37.252-37.252ZM.002 46.889a.99.99 0 0 0 .29.76L52.35 99.71c.201.2.478.307.76.29 2.37-.149 4.695-.46 6.963-.927.765-.157 1.03-1.096.478-1.648L2.576 39.448c-.552-.551-1.491-.286-1.648.479a50.067 50.067 0 0 0-.926 6.962ZM4.21 29.705a.988.988 0 0 0 .208 1.1l64.776 64.776c.289.29.726.375 1.1.208a49.908 49.908 0 0 0 5.185-2.684.981.981 0 0 0 .183-1.54L8.436 24.336a.981.981 0 0 0-1.541.183 49.896 49.896 0 0 0-2.684 5.185Zm8.448-11.631a.986.986 0 0 1-.045-1.354C21.78 6.46 35.111 0 49.952 0 77.592 0 100 22.407 100 50.048c0 14.84-6.46 28.172-16.72 37.338a.986.986 0 0 1-1.354-.045L12.659 18.074Z" /> </svg>
+          </div>
+
+          <div class="info">
+            <h3>Jira</h3>
+            <span class="link">{{$t('manageCompany.connect')}} Jira +</span>
+          </div>
+        </div>
+
+        <div class="status not-linked">{{$t('manageCompany.notLinked')}}</div>
+      </div>
+
+    </div>
+
+    <div class="management-section">
+      <h2>{{ $t('manageCompany.organizationManagement') }}</h2>
+
+      <div class="management-cards">
+
+        <div class="management-card">
+          <div class="icon-box">
+            <i class="pi pi-users"></i>
+          </div>
+
+          <div class="content">
+            <h3>{{ $t('manageCompany.companyUsers') }}</h3>
+            <p>{{ $t('manageCompany.companyUsersDesc') }}</p>
+          </div>
+        </div>
+
+        <div class="management-card">
+          <div class="icon-box">
+            <i class="pi pi-sitemap"></i>
+          </div>
+
+          <div class="content">
+            <h3>{{ $t('manageCompany.issueCategories') }}</h3>
+            <p>{{ $t('manageCompany.issueCategoriesDesc') }}</p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
   </div>
@@ -114,6 +152,10 @@ export default defineComponent({
 
 h2{
   color: var(--contrast-blue);
+}
+
+.connectButtons h2{
+  width: 100%;
 }
 
 .code{
@@ -128,16 +170,80 @@ h2{
   margin: 15px 0 15px 0;
 }
 
-.btn-content {
+.integrations {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.integration-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 320px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.left {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1rem;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo.linear {
+  background: white;
+}
+
+.logo.jira {
+  background: white;
 }
 
 .custom-icon {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.link {
+  color: #1d5bd1;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+
+.connected {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.not-linked {
+  background: #e5e7eb;
+  color: #374151;
 }
 
 .headContent{
@@ -148,10 +254,77 @@ h2{
   margin:  -2rem 4rem 0 4rem;
 }
 
-.connectButtons{
+.copyCompanyCode{
+  width: 100%;
+}
+
+.connectButtons div{
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.management-section {
+  margin: 5rem 0rem;
+}
+
+.management-section h2 {
+  margin-bottom: 1.5rem;
+}
+
+.management-cards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.management-card {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 1.5rem;
+  width: 420px;
+
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
+
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
+
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  min-width: 50px;
+  min-height: 50px;
+  background: #1e3a5f;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.icon-box i {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.content h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.content p {
+  margin: 0.3rem 0 0 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
 
 </style>

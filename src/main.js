@@ -39,6 +39,7 @@ import Editor from "primevue/editor";
 
 
 import ToastService from 'primevue/toastservice';
+import Toast from "primevue/toast";
 
 // Default App Instance
 const app = createApp(App);
@@ -98,6 +99,7 @@ app.use(PrimeVue, { theme: {
     .component('pv-fieldset', Fieldset)
     .component('pv-icon-field', IconField)
     .component('pv-input-icon', InputIcon)
+    .component('pv-toast', Toast)
 
 
 

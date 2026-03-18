@@ -5,7 +5,7 @@ import 'primeicons/primeicons.css'
 </script>
 
 <template>
-  <Toast />
+  <pv-toast />
   <router-view/>
 
 </template>

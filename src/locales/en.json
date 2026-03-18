@@ -174,6 +174,14 @@
     }
   },
   "manageCompany": {
+    "organizationManagement": "Organization Management",
+
+    "companyUsers": "Company Users",
+    "companyUsersDesc": "Manage company employees, permissions, and department assignments.",
+
+    "issueCategories": "Issue Categories",
+    "issueCategoriesDesc": "Configure custom categories, priority levels, and SLAs for your company.",
+
     "description": "Manage your company settings, users, and external integrations.",
     "companyCode": "Company Code",
     "integrations": "Integrations",
@@ -181,7 +189,11 @@
     "copyCompanyCode": "Copy Company Code",
     "copiedSuccesfully": "Copied!",
     "connectTo": "Connect To",
+    "manageSync": "Manage Sync",
     "companyMembers": "Company Members",
+    "connected": "CONNECTED",
+    "notLinked": "NOT LINKED",
+    "connect": "Connect",
     "table": {
       "fields": {
         "name": "Name",
