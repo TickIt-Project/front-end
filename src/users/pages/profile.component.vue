@@ -21,14 +21,21 @@ export default defineComponent({
     });
   },
   methods: {
-    //El blob se storea em memoria, si cambias la img aun no esta el imgUploadService
     onFieldChanged(payload) {
-      this.user[payload.field] = payload.value;
-      this.userService.updateUser({
-        [payload.field]: payload.value
-      }).catch(err => {
-            console.error('Error updating user', err);
-      });
+      this.user[payload.field] =
+          payload.field === 'profile_image'
+              ? URL.createObjectURL(payload.value)
+              : payload.value;
+
+      if (payload.field === 'profile_image') {
+
+        this.userService.updateProfileImage(this.user.id, payload.value)
+            .catch(err => console.error('Error uploading image', err));
+      } else {
+        this.userService.updateUser({
+          [payload.field]: payload.value
+        }).catch(err => console.error('Error updating user', err));
+      }
     }
   }
 

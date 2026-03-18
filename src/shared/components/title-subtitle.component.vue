@@ -23,4 +23,7 @@ div{
 h1{
   color: var(--contrast-blue);
 }
+p{
+  opacity: 70%;
+}
 </style>

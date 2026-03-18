@@ -19,7 +19,7 @@ export default defineComponent({
   data(){
     return{
       items:[{label: this.$t('nav.dashboard'), route:"/dashboard"}, {label:this.$t('nav.assignedIssues'), route:"/issues/assigned"},{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.recurrentIssues'), route:"/recurrent"},,{label: this.$t('nav.history'), route:"/history"},{label: this.$t('nav.manageCompany'), route:"/manageCompany"}],
-      info: {title: "Banco del peru", sub:""},
+      info: {title: "Banco del peru", sub:this.$t('manageCompany.description')},
       copied: false,
       code: null,
 
@@ -64,22 +64,25 @@ export default defineComponent({
 
   <div class="headContent">
     <div class="companyCodeContainer">
-      <p>{{ $t('manageCompany.companyCode') }}</p>
 
-      <div class="codeWrapper">
-        <h1>{{ code || 'BECHEPE' }}</h1>
+      <div style="margin-top: 4rem">
+        <h2>{{ $t('manageCompany.companyCode') }}</h2>
 
-        <i
-            class="pi pi-copy copyIcon"
-            @click="copyCode"
-            title="Copy"
-        ></i>
+          <p>{{ $t('manageCompany.companyCodeDescription') }}</p>
+          <div class="companyCode">
+            <h3 class="code">{{ code || 'BECHEPE' }}</h3>
+          </div>
+          <pv-button :label="$t('manageCompany.copyCompanyCode')" icon="pi pi-copy" @click="copyCode"></pv-button>
+
       </div>
     </div>
 
     <div class="connectButtons">
+      <h2>{{ $t('manageCompany.integrations') }}</h2>
       <pv-button severity="secondary">
+
         <span class="btn-content">
+          <div>
           <svg
               class="custom-icon"
               viewBox="0 0 100 100"
@@ -90,7 +93,7 @@ export default defineComponent({
                 d="M1.225 61.523c-.222-.949.908-1.546 1.597-.857l36.512 36.512c.69.69.092 1.82-.857 1.597-18.425-4.323-32.93-18.827-37.252-37.252ZM.002 46.889a.99.99 0 0 0 .29.76L52.35 99.71c.201.2.478.307.76.29 2.37-.149 4.695-.46 6.963-.927.765-.157 1.03-1.096.478-1.648L2.576 39.448c-.552-.551-1.491-.286-1.648.479a50.067 50.067 0 0 0-.926 6.962ZM4.21 29.705a.988.988 0 0 0 .208 1.1l64.776 64.776c.289.29.726.375 1.1.208a49.908 49.908 0 0 0 5.185-2.684.981.981 0 0 0 .183-1.54L8.436 24.336a.981.981 0 0 0-1.541.183 49.896 49.896 0 0 0-2.684 5.185Zm8.448-11.631a.986.986 0 0 1-.045-1.354C21.78 6.46 35.111 0 49.952 0 77.592 0 100 22.407 100 50.048c0 14.84-6.46 28.172-16.72 37.338a.986.986 0 0 1-1.354-.045L12.659 18.074Z"
             />
           </svg>
-
+          </div>
           {{ $t('manageCompany.connectTo') }} Linear
         </span>
       </pv-button>
@@ -105,66 +108,24 @@ export default defineComponent({
 
   </div>
 
-  <div class="companyMembers">
-    <h1>{{$t('manageCompany.companyMembers')}}</h1>
-  </div>
-
-  <pv-data-table v-model:filters="filters" :value="employees" paginator :rows="10" dataKey="id" filterDisplay="row" :loading="loading"
-             :globalFilterFields="['name', 'email']">
-    <template #header>
-      <div class="flex justify-end">
-        <pv-icon-field>
-          <pv-input-icon>
-            <i class="pi pi-search" />
-          </pv-input-icon>
-          <pv-input-text v-model="filters['global'].value" placeholder="Keyword Search" />
-        </pv-icon-field>
-      </div>
-    </template>
-    <template #empty> No employees found. </template>
-    <template #loading> Loading employees data. Please wait. </template>
-    <pv-column field="name" header="Name" style="min-width: 12rem">
-      <template #body="{ data }">
-        {{ data.name }}
-      </template>
-      <template #filter="{ filterModel, filterCallback }">
-        <pv-input-text v-model="filterModel.value" type="text" @input="filterCallback()" placeholder="Search by name" />
-      </template>
-    </pv-column>
-    <pv-column header="email" filterField="email" style="min-width: 12rem">
-      <template #body="{ data }">
-        {{ data.email }}
-      </template>
-      <template #filter="{ filterModel, filterCallback }">
-        <pv-input-text v-model="filterModel.value" type="text" @input="filterCallback()" placeholder="Search by country" />
-      </template>
-    </pv-column>
-  </pv-data-table>
 </template>
 
 <style scoped>
 
-.companyCodeContainer {
-  margin-top: 2rem;
+h2{
+  color: var(--contrast-blue);
 }
 
-.codeWrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: -2rem;
+.code{
+  font-weight: normal;
+  letter-spacing: 3px;
 }
-
-.copyIcon {
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: #6b7280;
-  transition: 0.2s ease;
-}
-
-.copyIcon:hover {
-  color: #111827;
-  transform: scale(1.1);
+.companyCode{
+  background-color: #F8FAFC;
+  border: dashed #CBD5E1;
+  border-radius:10px;
+  text-align: center;
+  margin: 15px 0 15px 0;
 }
 
 .btn-content {

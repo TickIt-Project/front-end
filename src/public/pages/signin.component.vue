@@ -17,9 +17,9 @@ export default defineComponent({
     return {
       resolver: zodResolver(
           z.object({
-            username: z
+            email: z
                 .string()
-                .min(3, { message: this.$t('auth.signIn.messages.username') }),
+                .min(3, { message: this.$t('auth.signIn.messages.email') }),
             password: z
                 .string()
                 .min(8, { message: this.$t('auth.signIn.messages.password') }),
@@ -30,7 +30,7 @@ export default defineComponent({
        * @description Defines the structure of form fields to be rendered dynamically
        */
       fields: [
-        { name: 'username',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
+        { name: 'email',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
         { name: 'password',   label: this.$t('auth.labels.password'),type: 'password', inputType: 'password', placeholder: this.$t('auth.placeholders.password'), initialValue: '' },
       ],
       authService: new AuthService(),

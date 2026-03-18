@@ -32,7 +32,7 @@
     },
     "signIn": {
       "messages": {
-        "username": "Invalid username",
+        "username": "Invalid email",
         "password": "Invalid password",
         "notFound": "No matching account found or incorrect password."
       },
@@ -97,7 +97,7 @@
   },
   "user": {
     "fields": {
-      "name": "Name",
+      "name": "Username",
       "email": "Email"
     }
   },
@@ -174,7 +174,11 @@
     }
   },
   "manageCompany": {
+    "description": "Manage your company settings, users, and external integrations.",
     "companyCode": "Company Code",
+    "integrations": "Integrations",
+    "companyCodeDescription": "Unique identifier for team members to join this organization.",
+    "copyCompanyCode": "Copy Company Code",
     "copiedSuccesfully": "Copied!",
     "connectTo": "Connect To",
     "companyMembers": "Company Members",

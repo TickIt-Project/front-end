@@ -15,7 +15,7 @@ export class UsersService {
     }
 
     getCurrentUser() {
-        return http.get('/users/1');
+        return http.get(`/users/${localStorage.getItem('user_id')}`);
     }
 
     updateUser(updateUser) {
@@ -25,6 +25,17 @@ export class UsersService {
 
     getEmployeesByCompanyId(CompanyId) {
         return http.get(`/users/${CompanyId}/roles?role=EMPLOYEE`);
+    }
+
+    updateProfileImage(userId, file) {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        return http.patch(`/users/${userId}/profile-image`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
     }
 
 
