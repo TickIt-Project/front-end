@@ -38,5 +38,15 @@ export class UsersService {
         });
     }
 
+    updatePassword({ userId, oldPassword, newPassword }) {
+        const companyId = localStorage.getItem('company_id');
+
+        return http.patch(`/users/${companyId}/password`, {
+            userId,
+            oldPassword,
+            newPassword
+        });
+    }
+
 
 }

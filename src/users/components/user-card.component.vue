@@ -18,7 +18,8 @@
         localName: this.name,
         localEmail: this.email,
         passwordVisible: false,
-        newPassword: ''
+        newPassword: '',
+        oldPaddword: ''
       };
     },
 
@@ -63,16 +64,19 @@
           value: this.localEmail
         })},
       savePassword() {
-        console.log("berry chan")
-        if (!this.newPassword) return;
+        if (!this.oldPassword || !this.newPassword) return;
+
         this.$emit('field-changed', {
           field: 'password',
-          value: this.newPassword
+          value: {
+            oldPassword: this.oldPassword,
+            newPassword: this.newPassword
+          }
         });
 
+        this.oldPassword = '';
         this.newPassword = '';
         this.passwordVisible = false;
-
       }
       }
 
@@ -87,8 +91,13 @@
         :style="{ width: '25rem' }"
     >
       <div class="password-row">
-        <label for="newPassword" class="label">New Password</label>
-        <pv-input-text id="newPassword" v-model="newPassword" class="password-input" autocomplete="off" />
+        <label>Old Password</label>
+        <pv-input-text v-model="oldPassword" />
+      </div>
+
+      <div class="password-row">
+        <label>New Password</label>
+        <pv-input-text v-model="newPassword" />
       </div>
       <div class="password-actions">
         <pv-button type="button" label="Cancel" severity="secondary" @click="passwordVisible = false"></pv-button>

@@ -31,7 +31,16 @@ export default defineComponent({
 
         this.userService.updateProfileImage(this.user.id, payload.value)
             .catch(err => console.error('Error uploading image', err));
-      } else {
+      }
+      else if (payload.field === 'password') {
+        this.userService.updatePassword({
+          userId: this.user.id,
+          oldPassword: payload.value.oldPassword,
+          newPassword: payload.value.newPassword
+        }).catch(err => console.error('Error updating password', err));
+
+        return;
+      }else {
         this.userService.updateUser({
           [payload.field]: payload.value
         }).catch(err => console.error('Error updating user', err));
