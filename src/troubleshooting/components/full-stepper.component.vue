@@ -9,19 +9,20 @@ import {IssueReportAssembler} from "@/shared/services/report-assembler.js";
 export default {
   name: "full-stepper",
   components: {ReportIssueCard, PvTag, PvFormField, PvFileUpload, PvSelect},
+  emits:["onFormSubmit"],
   data() {
     return {
+      selectedFile: null,
+      previewUrl: null,
       formValues: {
         title: '',
         description: '',
         url: '',
-        severity: {},
+        severity: '',
         screenResolved: null,
       },
-      //todo change url to service
-      uploadUrl: 'https://httpbin.org/post',
       value: '',
-      maxCharsDesc: 3000,
+      maxCharsDesc: 2500,
       maxCharsTitle: 100,
       reportService: new IssueReportService(),
       reportAssembler: new IssueReportAssembler(),
@@ -31,50 +32,65 @@ export default {
        */
       fields: [
         { name: 'title',       label: this.$t('report.steps.1.fields.title'),          type: 'text', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.title'), initialValue: '' },
-        { name: 'description',label: this.$t('report.steps.1.fields.description'),    type: 'editor', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.description'), initialValue: '' },
         { name: 'url',        label: this.$t('report.steps.1.fields.url'),            type: 'text', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.url'), initialValue: '' },
         { name: 'severity',        label: this.$t('report.steps.1.fields.severity'),   type: 'select', inputType: 'select',  placeholder: this.$t('report.steps.1.fields.severity'), initialValue: '', editable: false, options:[] },
+        { name: 'category',        label: this.$t('report.steps.1.fields.category'),   type: 'select', inputType: 'select',  placeholder: this.$t('report.steps.1.fields.category'), initialValue: '', editable: false, options:[] },
+        { name: 'detailed_comments',label: this.$t('report.steps.1.fields.deatailed_comments'),    type: 'editor', inputType: 'text',  placeholder: this.$t('report.steps.1.fields.deatailed_comments'), initialValue: '' },
       ]
     }
   },
-  mounted(){
-    Promise.all([
-      this.reportService.getSeverityOptions(),
-    ])
-        .then(([severityRes]) => {
-          // severity
-          const severityField = this.fields.find(f => f.name === 'severity');
-          if (severityField && Array.isArray(severityRes.data)) {
-            severityField.options = severityRes.data.map(sev => ({
-              label: this.$t(`status.${sev}`),
-              value: sev
-            }));
-          }
-        });
+  beforeUnmount() {
+    if (this.previewUrl) {
+      URL.revokeObjectURL(this.previewUrl);
+    }
   },
   methods: {
     formValuesToEntity(formValues) {
       let report = this.reportAssembler.EntityFromResponse({
         id : null,
-        companyId : null,
+        companyId : localStorage.getItem('company_id'),
         title : formValues.title,
         description : formValues.description,
         screen : this.screenResolved,
         url: formValues.url,
-        companyRole : "Advisor",
+        companyRole : localStorage.getItem('company_role_id'),
         severity : formValues.severity.value,
-        imgUrl : 'https://preview.redd.it/pls-gib-to-me-facts-lore-about-miku-v0-sfbyk901c82d1.jpeg',
-        status : null,
-        reporter : null,
+        imgUrl: this.previewUrl,
+        status : "Open",
+        reporter : localStorage.getItem('user_id'),
         assignee : null,
         resolvedAt : null,
         submittedAt : null,
         ticketOption : false}
-    );
+      );
       console.log(formValues);
       console.log(report);
       return report;
-  },
+    },
+    formValuesToFormData() {
+      const fd = new FormData();
+
+      fd.append('title', this.formValues.title);
+      fd.append('description', this.formValues.description);
+      fd.append('issueScreenUrl', this.formValues.url);
+      fd.append('severity', this.formValues.severity);
+
+      fd.append('companyId', localStorage.getItem('company_id'));
+      fd.append('companyRole', localStorage.getItem('company_role_id'));
+      fd.append('reporterId', localStorage.getItem('user_id'));
+
+      if (this.screenResolved) {
+        //todo change when back receives postScreenByName
+        fd.append('screenLocationId', "9c3d5d1e-4c7c-4fff-8848-d266d663de3f");
+      }
+
+      if (this.selectedFile) {
+        fd.append('file', this.selectedFile);
+      }
+
+      console.log("Form Values: ",fd);
+      return fd
+    },
   async convertScreen(url){
     const parts = url.replace(/^https?:\/\//, '').split('/');
     const screenPartUrl = parts[1]?.toLowerCase() ?? ''
@@ -89,20 +105,20 @@ export default {
   },
     async onUpload(event) {
       const file = event.files[0];
-      if (!file) return;
 
-      const formData = new FormData();
-      formData.append('file', file);
-
-      try {
-        const res = await this.reportService.uploadImage(formData);
-
-        this.formValues.imgUrl = res.data.url;
-
-        console.log('Imagen subida:', res.data.url);
-      } catch (e) {
-        console.error('Error subiendo imagen', e);
+      //clean
+      if (this.previewUrl) {
+        URL.revokeObjectURL(this.previewUrl);
       }
+
+      this.selectedFile = file;
+      this.previewUrl = URL.createObjectURL(file);
+    },
+
+    async submitReport() {
+
+      let fd = this.formValuesToFormData()
+      await this.reportService.createReport(fd);
     }
   },
   computed: {
@@ -155,7 +171,11 @@ export default {
       <pv-step-panel v-slot="{ activateCallback }">
         <div class="content">
           <div class="formContainer">
-            <div class="formContainer" v-for="field in fields" :key="field.name">
+            <div
+                v-for="field in fields"
+                :key="field.name"
+                :class="['fieldWrapper', { halfWidth: field.name !== 'title' }]"
+            >
               <pv-float-label v-if="field.type === 'text'" variant="on" required>
                 <pv-input-text
                     :id="field.name"
@@ -167,32 +187,7 @@ export default {
                 <label :for="field.name">{{ field.label }}</label>
               </pv-float-label>
 
-
-              <div v-if="field.type === 'editor'">
-                <label class="editorLabel" :for="field.name">{{ field.label }}</label>
-                <pv-editor
-                    v-model="formValues[field.name]"
-                    editorStyle="height: 45vh; overflow-y: auto;">
-                    <template v-slot:toolbar>
-                      <span class="ql-formats">
-                          <button v-pv-tooltip.bottom="'Bold'" class="ql-bold"></button>
-                          <button v-pv-tooltip.bottom="'Italic'" class="ql-italic"></button>
-                          <button v-pv-tooltip.bottom="'Underline'" class="ql-underline"></button>
-                      </span>
-                      <span class="ql-formats">
-                        <button v-pv-tooltip.bottom="'Ordered List'" class="ql-list" value="ordered"></button>
-                      </span>
-
-                    </template>
-                </pv-editor>
-
-                <p :style="{ color: descPlainLength > maxCharsDesc ? 'red' : 'inherit' }">
-                  {{ descPlainLength }} / {{ maxCharsDesc }} {{ $t('report.steps.1.characters') }}
-                </p>
-              </div>
-
               <pv-float-label v-if="field.type === 'select'" variant="on">
-                <!-- Wrapper para select + icon -->
                 <div class="select-with-tooltip">
                   <pv-select
                       v-model="formValues[field.name]"
@@ -202,6 +197,8 @@ export default {
                       optionLabel="label"
                       :inputId="field.name"
                   />
+
+
 
                   <i
                       v-if="field.name === 'severity'"
@@ -218,12 +215,40 @@ export default {
                 </label>
               </pv-float-label>
 
+              <div v-if="field.type === 'editor'">
+                <label class="editorLabel" :for="field.name">{{ field.label }}</label>
+                <pv-editor
+                    v-model="formValues[field.name]"
+                    editorStyle="height: 15vh; overflow-y: auto;">
+                  <template v-slot:toolbar>
+                      <span class="ql-formats">
+                          <button v-pv-tooltip.bottom="'Bold'" class="ql-bold"></button>
+                          <button v-pv-tooltip.bottom="'Italic'" class="ql-italic"></button>
+                          <button v-pv-tooltip.bottom="'Underline'" class="ql-underline"></button>
+                      </span>
+                    <span class="ql-formats">
+                        <button v-pv-tooltip.bottom="'Ordered List'" class="ql-list" value="ordered"></button>
+                      </span>
+
+                  </template>
+                </pv-editor>
+
+                <p :style="{ color: descPlainLength > maxCharsDesc ? 'red' : 'inherit' }">
+                  {{ descPlainLength }} / {{ maxCharsDesc }} {{ $t('report.steps.1.characters') }}
+                </p>
+              </div>
             </div>
           </div>
+
           </div>
+
+
+
         <div class="buttons">
           <pv-button :disabled="!formIsValid" :label="$t('report.steps.buttons.next')" @click="activateCallback('2')" />
         </div>
+
+
       </pv-step-panel>
     </pv-step-item>
     <pv-step-item value="2">
@@ -263,7 +288,7 @@ export default {
           </div>
           <div class="buttons">
             <pv-button :label="$t('report.steps.buttons.back')" severity="secondary" @click="activateCallback('2')" />
-            <pv-button :label="$t('report.steps.buttons.submit')"/>
+            <pv-button :label="$t('report.steps.buttons.submit')"  @click="submitReport"/>
           </div>
         </pv-step-panel>
     </pv-step-item>
@@ -293,15 +318,13 @@ export default {
 .content{
   max-height: 66vh;
 }
-.formContainer{
+.formContainer {
   max-width: 80%;
-  max-height: inherit;
   display: flex;
+  flex-wrap: wrap;
   gap: 2vh;
   column-gap: 5vh;
   margin-left: 1vh;
-  flex-direction: column;
-  flex-wrap: wrap;
 }
 .select{
   width: 100%;
@@ -327,5 +350,19 @@ p{
   font-size: 1rem;
   position: absolute;
   left: 102%;
+}
+.fieldWrapper {
+  width: 100%;
+}
+
+.halfWidth {
+  width: calc(50% - 2.5vh);
+}
+
+.formContainer {
+  max-width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vh;
 }
 </style>

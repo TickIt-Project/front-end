@@ -8,6 +8,7 @@ import { AuthService } from '@/public/services/auth-api.service';
 
 import {zodResolver} from "@primevue/forms/resolvers/zod";
 import {z} from "zod";
+import {UsersService} from "@/shared/services/users-api.service.js";
 
 export default defineComponent({
   name: "signin",
@@ -16,9 +17,9 @@ export default defineComponent({
     return {
       resolver: zodResolver(
           z.object({
-            username: z
+            email: z
                 .string()
-                .min(3, { message: this.$t('auth.signIn.messages.username') }),
+                .min(3, { message: this.$t('auth.signIn.messages.email') }),
             password: z
                 .string()
                 .min(8, { message: this.$t('auth.signIn.messages.password') }),
@@ -29,10 +30,11 @@ export default defineComponent({
        * @description Defines the structure of form fields to be rendered dynamically
        */
       fields: [
-        { name: 'username',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
+        { name: 'email',       label: this.$t('auth.labels.name'),type: 'text', inputType: 'text',             placeholder: this.$t('auth.placeholders.name'), initialValue: '' },
         { name: 'password',   label: this.$t('auth.labels.password'),type: 'password', inputType: 'password', placeholder: this.$t('auth.placeholders.password'), initialValue: '' },
       ],
       authService: new AuthService(),
+      userService: new UsersService(),
     };
   },
   methods: {
@@ -48,10 +50,27 @@ export default defineComponent({
         const token = response.data.token
         localStorage.setItem('auth_token', token)
 
-        this.$router.push('/dashboard')
+        const userId = response.data.userId
+        console.log(userId);
+        localStorage.setItem('user_id', userId)
+
+        const companyId = response.data.companyId
+        localStorage.setItem('company_id', companyId)
 
       } catch (error) {
-        console.error('Error en sign in', error)
+        console.error('Error in sign in', error)
+      }
+
+      try {
+        const response = await this.userService.getUserByUserId(localStorage.getItem('user_id'))
+
+        const companyRoleId = response.data.companyRoleId
+        localStorage.setItem('company_role_id', companyRoleId)
+
+        this.$router.push('/issues/reported')
+
+      } catch (error) {
+        console.error('Error in get user by id', error)
       }
     }
   }

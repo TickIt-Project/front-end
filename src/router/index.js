@@ -5,7 +5,6 @@
 
 import {createRouter, createWebHistory} from "vue-router";
 
-
 /**
  * @description Lazy-loaded component imports for route configuration
  * Using dynamic imports to enable code splitting and improve initial load performance
@@ -20,6 +19,7 @@ const MyIssuesComponent = () => import("../statistics/pages/my-issues-employee.c
 const HistoryComponent = () => import("../statistics/pages/history-it-page.component.vue");
 const DashboardComponent = () => import("../troubleshooting/pages/dashboard-page.component.vue");
 const RecurrentPagesComponent = () => import("../statistics/pages/recurrent-issues-pages.vue");
+const ManageCompanyComponent = () => import("../company/pages/manage-company-page.component.vue");
 
 /**
  * @type {import('vue-router').RouteRecordRaw[]}
@@ -38,7 +38,7 @@ const routes = [
     {   path: '/issues/reported', name: 'My Reported Issues',component: MyIssuesComponent, meta: {title: 'My Reported Issues'}},
     {   path: '/history', name: 'Issue History',component: HistoryComponent, meta: {title: 'History of Issues'}},
     {   path: '/dashboard', name: 'Dashboard',component: DashboardComponent, meta: {title: 'Dashboard'}},
-    {   path: '/reports', name: 'Reports',component: ReportComponent, meta: {title: 'reports'}},
+    {   path: '/manageCompany', name: 'Manage Company',component: ManageCompanyComponent, meta: {title: 'Manage Company'}},
   {   path: '/recurrent', name: 'recurrent', component: RecurrentPagesComponent, meta: {title: 'Recurrent Issues'}},
 //    {   path: '/:pathMatch(.*)*',       name: 'not-found',  component: PageNotFoundComponent,       meta: {title: 'Page not found'}},
 ]

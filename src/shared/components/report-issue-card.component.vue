@@ -3,7 +3,7 @@ import {defineComponent} from 'vue'
 import { severityConfig, statusConfig } from '../services/severity-configurations';
 import {Avatar as PvAvatar, Tag as PvTag, useToast} from "primevue";
 import Toast from 'primevue/toast';
-
+import { STATUS_OPTIONS } from '@/shared/mappers/status-options'
 
 
 export default defineComponent({
@@ -15,7 +15,8 @@ export default defineComponent({
       severityConfig, statusConfig,
       isTakeIssueDisabled: false,
       isDeTakeIssueDisabled: false,
-      selectedStatus: this.issue.status
+      selectedStatus: this.issue.status,
+      statusOptions: STATUS_OPTIONS(this.$t)
     }
   },
   props: {
@@ -23,7 +24,6 @@ export default defineComponent({
     issue: Object,
     fullInformation: Boolean,
     currentUser: Object,
-    statusOptions: Array
   },
   methods:{
     clickedTaken(){

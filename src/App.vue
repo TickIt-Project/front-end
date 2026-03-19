@@ -1,9 +1,11 @@
 <script>
 import 'primeicons/primeicons.css'
+
+
 </script>
 
 <template>
-
+  <pv-toast />
   <router-view/>
 
 </template>

@@ -19,13 +19,13 @@ import {
     Button,
     Card, Column, DataTable, DatePicker, Dialog, Fieldset,
     FileUpload,
-    FloatLabel,
-    Inplace,
+    FloatLabel, IconField,
+    Inplace, InputIcon,
     InputText,
     Message, MultiSelect,
     Password,
     Select,
-    Tag, ToastService, Tooltip
+    Tag, Tooltip
 } from "primevue";
 import {definePreset} from "@primeuix/themes";
 
@@ -37,6 +37,9 @@ import Step from 'primevue/step';
 import StepPanel from 'primevue/steppanel';
 import Editor from "primevue/editor";
 
+
+import ToastService from 'primevue/toastservice';
+import Toast from "primevue/toast";
 
 // Default App Instance
 const app = createApp(App);
@@ -94,6 +97,9 @@ app.use(PrimeVue, { theme: {
     .component('pv-multi-select',MultiSelect)
     .component('pv-dialog', Dialog)
     .component('pv-fieldset', Fieldset)
+    .component('pv-icon-field', IconField)
+    .component('pv-input-icon', InputIcon)
+    .component('pv-toast', Toast)
 
 
 

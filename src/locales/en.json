@@ -32,7 +32,7 @@
     },
     "signIn": {
       "messages": {
-        "username": "Invalid username",
+        "username": "Invalid email",
         "password": "Invalid password",
         "notFound": "No matching account found or incorrect password."
       },
@@ -50,7 +50,8 @@
     "dashboard": "Dashboard",
     "assignedIssues": "Assigned Issues",
     "history": "History",
-    "recurrentIssues": "Recurrent Issues"
+    "recurrentIssues": "Recurrent Issues",
+    "manageCompany": "Manage Company"
   },
   "report": {
     "info": {
@@ -68,11 +69,12 @@
         "header": "Issue Details",
         "fields": {
           "title": "Title",
-          "description": "Description",
+          "deatailed_comments": "Detailed Comments",
           "screen_issue": "Screen of Issue Location",
           "url": "URL of screen",
           "role": "User Role",
-          "severity": "Severity"
+          "severity": "Severity",
+          "category": "Category"
         },
         "characters": "characters",
         "min3": " cannot be less than 3 characters",
@@ -95,7 +97,7 @@
   },
   "user": {
     "fields": {
-      "name": "Name",
+      "name": "Username",
       "email": "Email"
     }
   },
@@ -169,6 +171,34 @@
   "severity": {
     "tooltip": {
       "all": "<b style='font-size:14px'>Low</b><br/><span style='font-size:12px'>Minimal impact. The issue does not affect my work and I can continue normally.</span><br/><br/><b style='font-size:14px'>Medium</b><br/><span style='font-size:12px'>Moderate impact. The issue affects my work, but I can still continue with some limitations.</span><br/><br/><b style='font-size:14px'>High</b><br/><span style='font-size:12px'>High impact. The issue significantly blocks my work and requires prompt attention.</span><br/><br/><b style='font-size:14px'>Critical</b><br/><span style='font-size:12px'>Critical impact. I cannot continue my work at all until this issue is resolved.</span>"
+    }
+  },
+  "manageCompany": {
+    "organizationManagement": "Organization Management",
+
+    "companyUsers": "Company Users",
+    "companyUsersDesc": "Manage company employees, permissions, and department assignments.",
+
+    "issueCategories": "Issue Categories",
+    "issueCategoriesDesc": "Configure custom categories, priority levels, and SLAs for your company.",
+
+    "description": "Manage your company settings, users, and external integrations.",
+    "companyCode": "Company Code",
+    "integrations": "Integrations",
+    "companyCodeDescription": "Unique identifier for team members to join this organization.",
+    "copyCompanyCode": "Copy Company Code",
+    "copiedSuccesfully": "Copied!",
+    "connectTo": "Connect To",
+    "manageSync": "Manage Sync",
+    "companyMembers": "Company Members",
+    "connected": "CONNECTED",
+    "notLinked": "NOT LINKED",
+    "connect": "Connect",
+    "table": {
+      "fields": {
+        "name": "Name",
+        "email": "Email"
+      }
     }
   }
 }

@@ -27,8 +27,8 @@ export class IssueReportEntity {
         this.severity = severity;
         this.imgUrl = imgUrl;
         this.status = status;
-        this.reporter = reporter;
-        this.assignee = assignee;
+        this.reporterId = reporter;
+        this.assigneeId = assignee;
         this.resolvedAt = resolvedAt;
         this.submittedAt = submittedAt;
         this.ticketOption = ticketOption;

@@ -18,7 +18,8 @@
         localName: this.name,
         localEmail: this.email,
         passwordVisible: false,
-        newPassword: ''
+        newPassword: '',
+        oldPaddword: ''
       };
     },
 
@@ -37,17 +38,18 @@
       },
 
       onFileSelected(event: Event) {
-
         const input = event.target as HTMLInputElement;
         const file = input.files?.[0];
         if (!file) return;
 
+
         const preview = URL.createObjectURL(file);
         this.$emit('update:profile_image', preview);
 
+
         this.$emit('field-changed', {
           field: 'profile_image',
-          value: preview
+          value: file
         });
       },
       saveName() {
@@ -62,16 +64,19 @@
           value: this.localEmail
         })},
       savePassword() {
-        console.log("berry chan")
-        if (!this.newPassword) return;
+        if (!this.oldPassword || !this.newPassword) return;
+
         this.$emit('field-changed', {
           field: 'password',
-          value: this.newPassword
+          value: {
+            oldPassword: this.oldPassword,
+            newPassword: this.newPassword
+          }
         });
 
+        this.oldPassword = '';
         this.newPassword = '';
         this.passwordVisible = false;
-
       }
       }
 
@@ -86,8 +91,13 @@
         :style="{ width: '25rem' }"
     >
       <div class="password-row">
-        <label for="newPassword" class="password-label">New Password</label>
-        <pv-input-text id="newPassword" v-model="newPassword" class="password-input" autocomplete="off" />
+        <label>Old Password</label>
+        <pv-input-text v-model="oldPassword" />
+      </div>
+
+      <div class="password-row">
+        <label>New Password</label>
+        <pv-input-text v-model="newPassword" />
       </div>
       <div class="password-actions">
         <pv-button type="button" label="Cancel" severity="secondary" @click="passwordVisible = false"></pv-button>
@@ -117,27 +127,27 @@
           </div>
           <div class="info">
 
-            <label for="name">{{$t('user.fields.name')}}</label>
+            <label class="label" for="name">{{$t('user.fields.name')}}</label>
             <pv-inplace>
               <template #display>
                 {{ name }}
                 <i class ="pi pi-pencil pencilIcon"></i>
               </template>
               <template #content="{ closeCallback }">
-                <span class="inline-flex items-center gap-2">
+                <span class="inputlabels">
                     <pv-input-text v-model="localName" autofocus />
                     <pv-button icon="pi pi-check" text severity="success" @click="saveName(closeCallback())" />
                 </span>
               </template>
             </pv-inplace>
-            <label for="email">{{$t('user.fields.email')}}</label>
+            <label class="label" for="email">{{$t('user.fields.email')}}</label>
             <pv-inplace>
               <template #display>
                 {{ email }}
                 <i class ="pi pi-pencil pencilIcon"></i>
               </template>
               <template #content="{ closeCallback }">
-                <span class="inline-flex items-center gap-2">
+                <span class="inputlabels">
                     <pv-input-text v-model="localEmail" autofocus />
                     <pv-button icon="pi pi-check" text severity="success" @click="saveEmail(closeCallback())" />
                 </span>
@@ -178,6 +188,7 @@
     font-weight: bold;
     color: var(--contrast-blue);
   }
+
   svg{
     position: absolute;
     top: -20px;
@@ -224,6 +235,8 @@
   .role {
     color: var(--contrast-gray);
     text-align: right;
+    font-weight: bold;
+    opacity: 40%;
   }
 
   .avatar-wrapper {
@@ -282,4 +295,7 @@
     justify-content: flex-end;
     gap: 0.75rem;
   }
+
+
+
   </style>

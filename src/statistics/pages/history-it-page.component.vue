@@ -2,7 +2,7 @@
 import {defineComponent} from 'vue'
 import TitleSubtitle from "@/shared/components/title-subtitle.component.vue";
 import NavHeader from "@/public/components/nav-header.component.vue";
-import TemplateTable from "@/statistics/components/template-table.component.vue";
+import TemplateTable from "@/shared/components/template-table.component.vue";
 import {FilterMatchMode, FilterOperator} from "@primevue/core/api";
 import { UsersService } from '@/shared/services/users-api.service';
 import { IssueReportService } from '@/shared/services/report-api.service';
